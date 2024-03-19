@@ -39,5 +39,4 @@ function RecoverPassword() {
     </div>
   );
 }
-
 export default RecoverPassword;
