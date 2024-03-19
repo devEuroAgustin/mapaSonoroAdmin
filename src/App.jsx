@@ -1,0 +1,52 @@
+import  { useState } from 'react';
+import { Link } from 'react-router-dom';
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === 'username') {
+      setUsername(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Aquí puedes manejar el inicio de sesión, por ejemplo, enviando los datos a una API
+    console.log(`Username: ${username}, Password: ${password}`);
+  };
+
+  return (
+    <div className="container">
+<div className="login-container">
+      <div className='login-header'>
+        <img src="src\assets/Austral_LAB.png" alt="Austral Lab" className='logo-austral'/>
+        <div className='login-titles'>
+          <h1 className="login-title">CMS Mapa Sonoro</h1>
+          <h2 className="login-subtitle">Fundacion Alerce 3000</h2>
+        </div>
+      </div>
+    <p className="login-instructions">indique su nombre de usuario y contraseña para entrar al sistema:</p>
+  <form onSubmit={handleSubmit}>
+  <div className="input-field">
+  <label className="input-titles">Usuario:</label>
+  <input type="text" name="username" value={username} onChange={handleChange} className="user-input" />
+</div>
+<div className="input-field">
+  <label className="input-titles">Contraseña:</label>
+  <input type="password" name="password" value={password} onChange={handleChange} className="user-input" />
+</div>
+
+    <input type="submit" value="Ingresar al sistema" className='submit-btn'/>
+    <Link to="/recover-password" className='lost-pass'>Olvide mi contraseña</Link>
+  </form>
+</div>
+</div>
+  );
+}
+
+export default Login;
