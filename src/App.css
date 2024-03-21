@@ -205,3 +205,52 @@ margin-right: 20px;
   display: flex;
   justify-content: center;
 }
+.main-content {
+  position: relative;
+  top: -38rem;
+  left: 273px;
+}
+th{
+  font: normal normal normal 16px/18px Arial;
+letter-spacing: 0px;
+color: #707070;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+td{
+  font: normal normal normal 16px/18px Arial;
+letter-spacing: 0px;
+color: #707070;
+padding:30px;
+}
+.table-btn {
+  width: 80px;
+height: 26px;
+/* UI Properties */
+border: 1px solid #8A8A8A;
+background-color: transparent;
+border-radius: 19px;
+opacity: 1;
+margin-left: 20px;
+}
+.pass-table-btn {
+  width: 171px;
+  height: 26px;
+  border: 1px solid #8A8A8A;
+  background-color: transparent;
+border-radius: 19px;
+opacity: 1;
+}
+.table-users{
+  border-spacing: 40px;
+}
+.table-users {
+  border-collapse: collapse;
+}
+
+.table-titles {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #707070;
+  border-bottom: 1px solid #707070;
+}

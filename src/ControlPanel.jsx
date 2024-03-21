@@ -6,7 +6,7 @@ function ControlPanel() {
     <div className="control-panel">
       <Link to="/modulo1">Módulo 1</Link>
       <Link to="/modulo2">Módulo 2</Link>
-      <Link to="/modulo3">Módulo 3</Link>
+      <Link to="/usuarios">Usuarios</Link>
     </div>
   );
 }

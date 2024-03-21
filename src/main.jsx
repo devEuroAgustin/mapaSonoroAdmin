@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App.jsx'
 import RecoverPassword from './RecoverPassword.jsx'
 import Dashboard from './Dashboard.jsx';
+import ModuloUsuarios from './ModuloUsuarios.jsx';
 import './App.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/recover-password" element={<RecoverPassword />} />
         <Route path="/" element={<App />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/usuarios" element={<ModuloUsuarios />} />
       </Routes>
     </Router>
   </React.StrictMode>,
