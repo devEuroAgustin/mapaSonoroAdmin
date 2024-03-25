@@ -3,7 +3,8 @@ import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
 
 function Dashboard() {
-  const username = 'Nombre de usuario'; // Reemplaza esto con el nombre de usuario real
+  const user = JSON.parse(localStorage.getItem('user'));
+  const username = user ? user.username : '';
 
   return (
     <div className="dashboard">

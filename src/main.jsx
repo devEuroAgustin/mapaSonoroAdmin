@@ -5,6 +5,9 @@ import App from './App.jsx'
 import RecoverPassword from './RecoverPassword.jsx'
 import Dashboard from './Dashboard.jsx';
 import ModuloUsuarios from './ModuloUsuarios.jsx';
+import EditarUsuario from './EditarUsuario.jsx';
+import MapaSonoro from './MapaSonoro.jsx';
+import Multimedia from './Multimedia.jsx';
 import './App.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -15,6 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/usuarios" element={<ModuloUsuarios />} />
+        <Route path="/editar-usuario" element={<EditarUsuario />} />
+        <Route path="/mapa-sonoro" element={<MapaSonoro />} />
+        <Route path="/multimedia" element={<Multimedia />} />
       </Routes>
     </Router>
   </React.StrictMode>,

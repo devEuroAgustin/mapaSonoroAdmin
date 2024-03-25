@@ -254,3 +254,58 @@ opacity: 1;
   border-top: 1px solid #707070;
   border-bottom: 1px solid #707070;
 }
+.border-bottom {
+  border-bottom: 1px solid #707070;
+  width: 90%;
+  margin-left: -50px;
+  margin-bottom: 80px;
+  margin-top: 20px;
+}.save-btn{
+  
+    width: 118px;
+    height: 38px;
+    /* UI Properties */
+    color: white;
+    background: #000000 0% 0% no-repeat padding-box;
+    border-radius: 19px;
+    border-color: #0000;
+    margin-top: -19px;
+    opacity: 1;
+    font-size: 19px;
+}
+.edit-form {
+  display: flex;
+}
+.edit-user-input {
+  width: 218px;
+height: 38px;
+/* UI Properties */
+border: 1px solid #BCBCBC;
+border-radius: 19px;
+opacity: 1;
+margin-top: 20px;
+padding-left: 8px;
+margin-left: 20px;
+}
+.user-select {
+  width: 118px;
+height: 38px;
+/* UI Properties */
+border: 1px solid #BCBCBC;
+border-radius: 19px;
+opacity: 1;
+margin-top: 20px;
+padding-left: 8px;
+margin-left: 20px;
+}
+.input-titles-edit-usuario{
+  font: normal normal normal 11px / 12px Arial;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+  position: absolute;
+  top: 12px;
+  left: 27px;
+  background: white;
+  padding: 0 5px;
+}

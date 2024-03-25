@@ -1,10 +1,12 @@
 
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
+import { useNavigate } from 'react-router-dom';
 
 function ModuloUsuarios() {
-  const username = 'Nombre de usuario'; 
-
+  const user = JSON.parse(localStorage.getItem('user'));
+  const username = user ? user.username : '';
+  const navigate = useNavigate();
   // Datos de ejemplo
   const users = [
     { username: 'Pedro Aste', email: 'pedroaste@gmail.com', profile: 'Admin' },
@@ -35,7 +37,7 @@ function ModuloUsuarios() {
                 <td>{user.profile}</td>
                 <td>
                   <button className='pass-table-btn'>Reestablecer contraseña</button>
-                  <button className='table-btn'>Editar</button>
+                  <button className='table-btn' onClick={() => navigate('/editar-usuario')}>Editar</button>
                   <button className='table-btn'>Eliminar</button>
                 </td>
               </tr>
