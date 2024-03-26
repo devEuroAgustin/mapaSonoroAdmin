@@ -309,3 +309,46 @@ margin-left: 20px;
   background: white;
   padding: 0 5px;
 }
+@media screen and (width: 1920px) and (height: 1080px) {
+  .main-content {
+    position: relative;
+    top: -67rem;
+    left: 273px;
+  }
+}
+.mapa {
+  width: 1040px;
+  height: 590px;
+  border: #BCBCBC 0.5px solid;
+}
+/* .mapa::before,
+.mapa::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-left: #BCBCBC 0.5px solid;
+}
+
+.mapa::before {
+  left: calc(75% / 3);
+}
+
+.mapa::after {
+  left: calc(2 * 75% / 3);
+} */
+.punto {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.punto::after {
+  content: attr(data-name);
+  position: absolute;
+  left: -17px;
+  top: 14px;
+  white-space: nowrap;
+}

@@ -1,81 +1,52 @@
-import { useState } from 'react';
+
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
+import { useNavigate } from 'react-router-dom';
 
-function EditarUsuarios() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const username1 = user ? user.username : '';
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [profile, setProfile] = useState('');
+function ModuloMulti() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const username = user ? user.username : '';
+  const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const multimedia = [
+    { nombreES: 'Nombre Multimedia Español', nombreEN: 'Name Multimedia English', type: 'video' },
+    { nombreES: 'Nombre Multimedia Español', nombreEN: 'Name Multimedia English', type: 'img' },
+    { nombreES: 'Nombre Multimedia Español', nombreEN: 'Name Multimedia English', type: 'audio' },
 
-    switch (name) {
-      case 'username':
-        setUsername(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'profile':
-        setProfile(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const userData = {
-      username: username,
-      email: email,
-      profile: profile
-    };
-
-    fetch('https://mapaapi.onrender.com/api/clients/edit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-  };
+  ];
 
   return (
-<div className="dashboard">
-  <Header username={username1} />
-  <ControlPanel />
-  <div className="main-content">
-    <button className='save-btn' type="submit" form="editForm">Guardar</button>
-    <hr />
-    <form id="editForm" onSubmit={handleSubmit}className='edit-form'>
-      <div className="input-field">
-        <label className="input-titles-edit-usuario">Usuario:</label>
-        <input type="text" name="username" value={username} onChange={handleChange} className="edit-user-input" />
+    <div className="dashboard">
+      <Header username={username} />
+      <ControlPanel />
+      <div className="main-content">
+      <button className='close-ses'>+ Agregar multimedia</button>
+      <table className='table-users'>
+          <thead>
+            <tr className='table-titles' border="1">
+              <th>Nombre ES</th>
+              <th>Nombre EN</th>
+              <th>Tipo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {multimedia.map((item, index) => (
+               <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#FAF8F8' : '#FFFFFF' }}>
+                <td>{item.nombreES}</td>
+                <td>{item.nombreEN}</td>
+                <td>{item.type}</td>
+                <td>
+                  <button className='table-btn' onClick={() => navigate('/editar-usuario')}>Editar</button>
+                  <button className='table-btn'>Eliminar</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table> 
       </div>
-      <div className="input-field">
-        <label className="input-titles-edit-usuario">Email:</label>
-        <input type="text" name="email" value={email} onChange={handleChange} className="edit-user-input" />
-      </div>
-      <div className="input-field">
-        <label className="input-titles-edit-usuario">Perfil:</label>
-        <select name="profile" value={profile} onChange={handleChange} className="user-select">
-          <option value=""></option>
-          <option value="admin">Admin</option>
-          <option value="user">User</option>
-        </select>
-      </div>
-    </form>
-  </div>
-</div>
+    </div>
   );
 }
 
-export default EditarUsuarios;
+export default ModuloMulti;
