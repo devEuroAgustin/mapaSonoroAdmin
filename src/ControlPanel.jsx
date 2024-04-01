@@ -1,12 +1,12 @@
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function ControlPanel() {
   return (
     <div className="control-panel">
-      <Link to="/mapa-sonoro">Mapa Sonoro</Link>
-      <Link to="/multimedia">Multimedia</Link>
-      <Link to="/usuarios">Usuarios</Link>
+      <NavLink to="/mapa-sonoro" activeClassName="active-link">Mapa Sonoro</NavLink>
+      <NavLink to="/multimedia" activeClassName="active-link">Multimedia</NavLink>
+      <NavLink to="/usuarios" activeClassName="active-link">Usuarios</NavLink>
     </div>
   );
 }

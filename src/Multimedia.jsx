@@ -2,6 +2,10 @@
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
 import { useNavigate } from 'react-router-dom';
+import iconVideo from './assets/video.svg';
+import iconAudio from './assets/audio.svg';
+import iconImg from './assets/img.svg';
+import iconShare from './assets/compartir.svg';
 
 function ModuloMulti() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -35,8 +39,19 @@ function ModuloMulti() {
                <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#FAF8F8' : '#FFFFFF' }}>
                 <td>{item.nombreES}</td>
                 <td>{item.nombreEN}</td>
-                <td>{item.type}</td>
                 <td>
+  <img 
+    src={
+      item.type === 'video' ? iconVideo :
+      item.type === 'audio' ? iconAudio :
+      item.type === 'img' ? iconImg :
+      null
+    } 
+    alt={item.type}
+  />
+</td>
+                <td>
+                <img src={iconShare} alt="Compartir" />
                   <button className='table-btn' onClick={() => navigate('/editar-usuario')}>Editar</button>
                   <button className='table-btn'>Eliminar</button>
                 </td>
