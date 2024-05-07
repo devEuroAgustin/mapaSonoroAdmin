@@ -117,13 +117,13 @@ opacity: 1;
   margin-left: 20px;
 }
 .login-header {
-display: flex;
-    flex-direction: row;
-    margin-right: auto;
-    margin-bottom: 20px;
-    width: 113%;
-    border-bottom: 1px solid #bcbcbc;
-    margin-right: -2px;
+  display: flex;
+  flex-direction: row;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: 100%;
+  border-bottom: 1px solid #bcbcbc;
+  margin-right: -2px;
 }
 .login-titles{
   margin-left: 11px;
@@ -172,6 +172,7 @@ display: flex;
   opacity: 1;
   font-size: 19px;
   margin-right: 20px;
+  margin-bottom: 20px;
 }
 .username{
   font: normal normal normal 14px/16px Arial;
@@ -311,6 +312,65 @@ margin-left: 20px;
   background: white;
   padding: 0 5px;
 }
+.modal {
+  border: 1px solid #bcbcbc;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 356px;
+  height: 249px;
+  border-radius: 10px;
+  background-color: white;
+}
+.submit-btn-modal {
+  width: 318px;
+  height: 38px;
+  color: white;
+  background: #000000 0% 0% no-repeat padding-box;
+  border-radius: 19px;
+  border-color: #0000;
+  margin-top: 117px;
+  opacity: 1;
+  font-size: 19px;
+}
+.edit-multi-input {
+  width: 295px;
+  height: 38px;
+  border: 1px solid #BCBCBC;
+  border-radius: 19px;
+  opacity: 1;
+  margin-top: 20px;
+  padding-left: 8px;
+  margin-left: 20px;
+}
+.input-titles-edit-usuario-destacado {
+  font: normal normal normal 18px / 38px Arial;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+  position: absolute;
+  top: 12px;
+  left: 27px;
+  background: white;
+  padding: 0 5px;
+}
+.input-titles-modal{
+  font: normal normal normal 11px / 12px Arial;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+  position: absolute;
+  top: 18px;
+  left: 21px;
+  background: white;
+  padding: 0 5px;
+}
+.modal-form{
+  width: 100%;
+    margin-left: 12px;
+}
 @media screen and (width: 1920px) and (height: 1080px) {
   .main-content {
     position: relative;
@@ -347,6 +407,15 @@ margin-left: 20px;
 .mapa::after {
   left: calc(2 * 75% / 3);
 } */
+.login-header {
+  display: flex;
+  flex-direction: row;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: 96%;
+  border-bottom: 1px solid #bcbcbc;
+  margin-right: -2px;
+}
 .punto {
   position: absolute;
   width: 10px;

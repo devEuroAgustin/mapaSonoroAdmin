@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import { useParams,useNavigate } from 'react-router-dom';
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
 
 function EditarUsuarios() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const username1 = user ? user.username : '';
+  const user = JSON.parse(localStorage.getItem('user'));
+  const username1 = user ? user.username : '';
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [profile, setProfile] = useState('');
+  const { id } = useParams();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,7 +28,8 @@ function EditarUsuarios() {
         break;
     }
   };
-
+  
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -36,15 +39,18 @@ function EditarUsuarios() {
       profile: profile
     };
 
-    fetch('https://mapaapi.onrender.com/api/clients/edit', {
-      method: 'POST',
+    fetch(`https://mapaapi.onrender.com/api/clients/update/${id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(userData)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data);
+      navigate('/usuarios');
+    })
     .catch(error => console.error('Error:', error));
   };
 

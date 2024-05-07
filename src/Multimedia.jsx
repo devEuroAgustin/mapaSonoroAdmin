@@ -6,18 +6,42 @@ import iconVideo from './assets/video.svg';
 import iconAudio from './assets/audio.svg';
 import iconImg from './assets/img.svg';
 import iconShare from './assets/compartir.svg';
+import { useState, useEffect } from 'react';
 
 function ModuloMulti() {
   const user = JSON.parse(localStorage.getItem('user'));
+  const [multimedia, setMultimedia] = useState([]);
   const username = user ? user.username : '';
   const navigate = useNavigate();
 
-  const multimedia = [
-    { nombreES: 'Nombre Multimedia Español', nombreEN: 'Name Multimedia English', type: 'video' },
-    { nombreES: 'Nombre Multimedia Español', nombreEN: 'Name Multimedia English', type: 'img' },
-    { nombreES: 'Nombre Multimedia Español', nombreEN: 'Name Multimedia English', type: 'audio' },
+  const fetchMultimedia = async () => {
+    try {
+      const response = await fetch('https://mapaapi.onrender.com/api/multi/');
+      const data = await response.json();
+      setMultimedia(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  const deleteMultimedia = async (id) => {
+    try {
+      const response = await fetch(`https://mapaapi.onrender.com/api/multi/delete/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Error al eliminar el multimedia');
+      }
+     
+      const updatedMultimedia = multimedia.filter(item => item.id !== id);
+      setMultimedia(updatedMultimedia);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
-  ];
+  useEffect(() => {
+    fetchMultimedia();
+  }, []);
 
   return (
     <div className="dashboard">
@@ -37,8 +61,8 @@ function ModuloMulti() {
           <tbody>
             {multimedia.map((item, index) => (
                <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#FAF8F8' : '#FFFFFF' }}>
-                <td>{item.nombreES}</td>
-                <td>{item.nombreEN}</td>
+                <td>{item.nombre_es}</td>
+                <td>{item.nombre_eng}</td>
                 <td>
   <img 
     src={
@@ -52,8 +76,8 @@ function ModuloMulti() {
 </td>
                 <td>
                 <img src={iconShare} alt="Compartir" />
-                  <button className='table-btn' onClick={() => navigate('/editar-usuario')}>Editar</button>
-                  <button className='table-btn'>Eliminar</button>
+                <button className='table-btn' onClick={() => navigate(`/editar-multimedia/${item.id}`)}>Editar</button>
+                <button className='table-btn' onClick={() => deleteMultimedia(item.id)}>Eliminar</button>
                 </td>
               </tr>
             ))}
