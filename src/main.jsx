@@ -10,6 +10,10 @@ import MapaSonoro from './MapaSonoro.jsx';
 import Multimedia from './Multimedia.jsx';
 import './App.css'
 import EditarMultimedia from './EditarMultimedia.jsx';
+import AgregarMultimedia from './AgregarMultimedia.jsx';
+import AgregarUsuario from './AgregarUsuarios.jsx';
+import AgregarPunto from './AgregarPunto.jsx';
+import EditarPunto from './EditarPunto.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -23,6 +27,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/mapa-sonoro" element={<MapaSonoro />} />
         <Route path="/multimedia" element={<Multimedia />} />
         <Route path="/editar-multimedia/:id" element={<EditarMultimedia />} />
+        <Route path="/create-multimedia" element={<AgregarMultimedia />} />
+        <Route path="/create-usuario" element={<AgregarUsuario />} />
+        <Route path="/agregar-punto" element={<AgregarPunto />} />
+        <Route path="/editar-punto/:id" element={<EditarPunto />} />
       </Routes>
     </Router>
   </React.StrictMode>,

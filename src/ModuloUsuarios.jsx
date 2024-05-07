@@ -79,7 +79,7 @@ function ModuloUsuarios() {
       <Header username={username} />
       <ControlPanel />
       <div className="main-content">
-      <button className='close-ses'>+ Agregar Usuarios</button>
+      <button className='close-ses'onClick={() => navigate("/create-usuario")}>+ Agregar Usuarios</button>
       <table className='table-users'>
           <thead>
             <tr className='table-titles' border="1">

@@ -48,7 +48,7 @@ function ModuloMulti() {
       <Header username={username} />
       <ControlPanel />
       <div className="main-content">
-      <button className='close-ses'>+ Agregar multimedia</button>
+      <button className='close-ses' onClick={() => navigate(`/create-multimedia`)}>+ Agregar multimedia</button>
       <table className='table-users'>
           <thead>
             <tr className='table-titles' border="1">

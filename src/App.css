@@ -119,9 +119,8 @@ opacity: 1;
 .login-header {
   display: flex;
   flex-direction: row;
-  margin-right: auto;
   margin-bottom: 20px;
-  width: 100%;
+  width: 102%;
   border-bottom: 1px solid #bcbcbc;
   margin-right: -2px;
 }
@@ -410,9 +409,8 @@ margin-left: 20px;
 .login-header {
   display: flex;
   flex-direction: row;
-  margin-right: auto;
   margin-bottom: 20px;
-  width: 96%;
+  width: 102%;
   border-bottom: 1px solid #bcbcbc;
   margin-right: -2px;
 }
