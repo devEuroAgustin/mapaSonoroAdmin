@@ -1,3 +1,8 @@
+.dashboard, #root {
+  margin: 0;
+  padding: 0;
+    height: 0px;
+}
 .container {
   display: flex;
   justify-content: center;
@@ -375,11 +380,7 @@ margin-left: 20px;
     margin-left: 12px;
 }
 @media screen and (width: 1920px) and (height: 1080px) {
-  .main-content {
-    position: relative;
-    top: -67rem;
-    left: 273px;
-  }
+
   td{
     font: normal normal normal 16px/18px Arial;
   letter-spacing: 0px;
@@ -394,6 +395,8 @@ margin-left: 20px;
   height: 590px;
   border: #BCBCBC 0.5px solid;
 }
+
+
 /* .mapa::before,
 .mapa::after {
   content: '';
@@ -442,4 +445,11 @@ button:hover {
 }
 a.active {
   font-weight: bold;
+}
+@media screen and (min-width: 1920px) and (min-height: 1080px) {
+  .main-content {
+    position: relative;
+    top: -67rem;
+    left: 273px;
+  }
 }

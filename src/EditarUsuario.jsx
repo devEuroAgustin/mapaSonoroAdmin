@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect  } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
@@ -10,6 +10,18 @@ function EditarUsuarios() {
   const [email, setEmail] = useState('');
   const [profile, setProfile] = useState('');
   const { id } = useParams();
+
+  useEffect(() => {
+    fetch(`https://mapaapi.onrender.com/api/clients/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        setUsername(data.username);
+        setEmail(data.email);
+        setProfile(data.profile || 'admin');
+      })
+      .catch(error => console.error('Error:', error));
+  }, [id]);
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;

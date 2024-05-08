@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
@@ -13,6 +13,20 @@ const [nombre_es, setNombreEs] = useState('');
 const [type, setType] = useState('');
 const [destacado, setDestacado] = useState(false);
   const { id } = useParams();
+
+  useEffect(() => {
+    fetch(`https://mapaapi.onrender.com/api/multi/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        setNombreEng(data.nombre_eng || '');
+        setRutaArchivo(data.ruta_archivo || '');
+        setHora(data.hora || '');
+        setNombreEs(data.nombre_es || '');
+        setType(data.type || '');
+        setDestacado(data.destacado || false);
+      })
+      .catch(error => console.error('Error:', error));
+  }, [id]);
 
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;

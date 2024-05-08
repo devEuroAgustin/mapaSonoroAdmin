@@ -16,6 +16,21 @@ function EditarPunto() {
   const [descripcion_eng, setDescripcionEng] = useState('');
   const [type, setType] = useState('');
 
+  useEffect(() => {
+    fetch(`https://mapaapi.onrender.com/api/points/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        setNombreEs(data.nombre_es || '');
+        setNombreEng(data.nombre_eng || '');
+        setInfoPuntoEs(data.info_punto_es || '');
+        setInfoPuntoEng(data.info_punto_eng || '');
+        setCoordenadas(data.coordenadas || '');
+        setDescripcionEs(data.descripcion_es || '');
+        setDescripcionEng(data.descripcion_eng || '');
+        setType(data.type || '');
+      })
+      .catch(error => console.error('Error:', error));
+  }, [id]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
