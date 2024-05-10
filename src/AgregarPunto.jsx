@@ -10,7 +10,7 @@ function AgregarPunto() {
   const [nombre_eng, setNombreEng] = useState('');
   const [info_punto_es, setInfoPuntoEs] = useState('');
   const [info_punto_eng, setInfoPuntoEng] = useState('');
-  const [coordenadas, setCoordenadas] = useState('');
+  const [coordenadas, setCoordenadas] = useState('{"top":"0px", "left":"0px"}');
   const [descripcion_es, setDescripcionEs] = useState('');
   const [descripcion_eng, setDescripcionEng] = useState('');
   const [type, setType] = useState('');

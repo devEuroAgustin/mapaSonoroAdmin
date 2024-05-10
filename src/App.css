@@ -12,7 +12,7 @@
 .login-container {
   display: flex;
   align-items: center;
-  height: 62vh;
+  height: 422px;
   border: 1px solid #bcbcbc;
   border-radius: 10px;
   padding: 20px;
@@ -220,6 +220,8 @@ margin-right: 20px;
   position: relative;
   top: -38rem;
   left: 273px;
+
+  
 }
 th{
   font: normal normal normal 16px/18px Arial;
@@ -388,7 +390,18 @@ margin-left: 20px;
   padding-inline: 77px;
     padding-block: 7px;
   }
-
+  .login-container {
+    display: flex;
+    align-items: center;
+    height: 422px;
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 356px;
+    margin: auto;
+    flex-flow: column;
+}
 }
 .mapa {
   width: 1040px;

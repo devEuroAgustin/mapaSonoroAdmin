@@ -2,7 +2,7 @@ import { useState,useEffect  } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
-
+import Loader from './utils/Loader';
 function EditarUsuarios() {
   const user = JSON.parse(localStorage.getItem('user'));
   const username1 = user ? user.username : '';
@@ -10,6 +10,7 @@ function EditarUsuarios() {
   const [email, setEmail] = useState('');
   const [profile, setProfile] = useState('');
   const { id } = useParams();
+const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     fetch(`https://mapaapi.onrender.com/api/clients/${id}`)
@@ -18,6 +19,7 @@ function EditarUsuarios() {
         setUsername(data.username);
         setEmail(data.email);
         setProfile(data.profile || 'admin');
+                setIsLoading(false);
       })
       .catch(error => console.error('Error:', error));
   }, [id]);
@@ -71,6 +73,10 @@ function EditarUsuarios() {
   <Header username={username1} />
   <ControlPanel />
   <div className="main-content">
+  {isLoading ? (
+          <Loader />
+        ) : (
+          <>
     <button className='save-btn' type="submit" form="editForm">Guardar</button>
     <hr />
     <form id="editForm" onSubmit={handleSubmit}className='edit-form'>
@@ -91,8 +97,10 @@ function EditarUsuarios() {
         </select>
       </div>
     </form>
-  </div>
-</div>
+    </>
+        )}
+      </div>
+    </div>
   );
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {useNavigate } from 'react-router-dom';
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
@@ -14,6 +14,8 @@ const [type, setType] = useState('');
 const [destacado, setDestacado] = useState(false);
 const [punto_id, setPuntoId] = useState('');
 const [user_id, setUserId] = useState('');
+const [puntos, setPuntos] = useState([]);
+const [usuarios, setUsuarios] = useState([]);
 
 
   const handleChange = (event) => {
@@ -79,6 +81,21 @@ const [user_id, setUserId] = useState('');
     })
     .catch(error => console.error('Error:', error));
   };
+  useEffect(() => {
+    // Obtener los puntos
+    fetch('https://mapaapi.onrender.com/api/points')
+      .then(response => response.json())
+      .then(data => setPuntos(data))
+      .catch(error => console.error('Error:', error));
+  
+    // Obtener los usuarios
+    fetch('https://mapaapi.onrender.com/api/clients')
+      .then(response => response.json())
+      .then(data => setUsuarios(data))
+      .catch(error => console.error('Error:', error));
+  
+    // ...
+  }, []);
 
   return (
 <div className="dashboard">
@@ -108,9 +125,14 @@ const [user_id, setUserId] = useState('');
       <input type="text" name="nombre_es" value={nombre_es} onChange={handleChange} className="edit-multi-input" />
     </div>
     <div className="input-field">
-      <label className="input-titles-edit-usuario">Tipo:</label>
-      <input type="text" name="type" value={type} onChange={handleChange} className="edit-multi-input" />
-    </div>
+  <label className="input-titles-edit-usuario">Tipo:</label>
+  <select name="type" value={type} onChange={handleChange} className="edit-multi-input">
+    <option value="">Selecciona un tipo</option>
+    <option value="img">Imagen</option>
+    <option value="video">Video</option>
+    <option value="audio">Audio</option>
+  </select>
+</div>
     <div className="input-field">
       <label className="input-titles-edit-usuario-destacado">Destacado:</label>
       <input type="checkbox" name="destacado" checked={destacado} onChange={handleChange} className="edit-multi-input" />
@@ -119,11 +141,23 @@ const [user_id, setUserId] = useState('');
   <div className="input-row">
     <div className="input-field">
       <label className="input-titles-edit-usuario">Punto ID:</label>
-      <input type="text" name="punto_id" value={punto_id} onChange={handleChange} className="edit-multi-input" />
+      <select name="punto_id" value={punto_id} onChange={handleChange} className="edit-multi-input">
+  {puntos.map(punto => (
+    <option key={punto.id} value={punto.id}>
+      {punto.nombre_es}
+    </option>
+  ))}
+</select>
     </div>
     <div className="input-field">
       <label className="input-titles-edit-usuario">User ID:</label>
-      <input type="text" name="user_id" value={user_id} onChange={handleChange} className="edit-multi-input" />
+      <select name="punto_id" value={user_id} onChange={handleChange} className="edit-multi-input">
+  {usuarios.map(punto => (
+    <option key={punto.id} value={punto.id}>
+      {punto.username}
+    </option>
+  ))}
+</select>
     </div>
   </div>
     </form>

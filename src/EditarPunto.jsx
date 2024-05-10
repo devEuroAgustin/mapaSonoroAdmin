@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
-
+import Loader from './utils/Loader';
 function EditarPunto() {
   const user = JSON.parse(localStorage.getItem('user'));
   const username1 = user ? user.username : '';
@@ -15,7 +15,7 @@ function EditarPunto() {
   const [descripcion_es, setDescripcionEs] = useState('');
   const [descripcion_eng, setDescripcionEng] = useState('');
   const [type, setType] = useState('');
-
+const [isLoading, setIsLoading] = useState(true); 
   useEffect(() => {
     fetch(`https://mapaapi.onrender.com/api/points/${id}`)
       .then(response => response.json())
@@ -28,6 +28,7 @@ function EditarPunto() {
         setDescripcionEs(data.descripcion_es || '');
         setDescripcionEng(data.descripcion_eng || '');
         setType(data.type || '');
+                        setIsLoading(false);
       })
       .catch(error => console.error('Error:', error));
   }, [id]);
@@ -100,6 +101,10 @@ function EditarPunto() {
       <Header username={username1} />
       <ControlPanel />
       <div className="main-content">
+      {isLoading ? (
+          <Loader />
+        ) : (
+          <>
         <button className='save-btn' type="submit" form="editForm">Guardar</button>
         <hr />
         <form id="editForm" onSubmit={handleSubmit} className='edit-form'>
@@ -142,6 +147,8 @@ function EditarPunto() {
             </div>
           </div>
         </form>
+        </>
+        )}
       </div>
     </div>
   );

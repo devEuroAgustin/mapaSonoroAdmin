@@ -2,6 +2,7 @@
 import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
 import { useNavigate } from 'react-router-dom';
+import Loader from './utils/Loader';
 import { useState, useEffect } from 'react';
 
 function ModuloUsuarios() {
@@ -11,13 +12,20 @@ function ModuloUsuarios() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [userId, setUserId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); 
 
   const navigate = useNavigate();
   // Datos de ejemplo
   function fetchUsers() {
     fetch('https://mapaapi.onrender.com/api/clients/')
       .then(response => response.json())
-      .then(data => setUsers(data))
+      
+      .then(data => {setUsers(data)
+    
+        setIsLoading(false);
+ 
+
+      })
       .catch(error => console.error('Error:', error));
   }
   useEffect(() => {
@@ -44,8 +52,10 @@ function ModuloUsuarios() {
     .then(data => {
       // Actualiza la lista de usuarios después de eliminar un usuario
       setUsers(users.filter(user => user.id !== id));
+      setIsLoading(false);
     })
     .catch(error => console.error('Error:', error));
+    setIsLoading(false);
   }
 
   const handleNewPasswordChange = (event) => {
@@ -73,47 +83,52 @@ function ModuloUsuarios() {
     })
     .catch(error => console.error('Error:', error));
   };
-
   return (
     <div className="dashboard">
       <Header username={username} />
       <ControlPanel />
+  
       <div className="main-content">
-      <button className='close-ses'onClick={() => navigate("/create-usuario")}>+ Agregar Usuarios</button>
-      <table className='table-users'>
-          <thead>
-            <tr className='table-titles' border="1">
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Perfil</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-               <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#FAF8F8' : '#FFFFFF' }}>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.profile || "admin"}</td>
-                <td>
-                <button className='pass-table-btn' onClick={() => handleOpenModal(user.id)}>Reestablecer contraseña</button>
-                  <button className='table-btn' onClick={() => navigate(`/editar-usuario/${user.id}`)}>Editar</button>
-                  <button className='table-btn' onClick={() => deleteUser(user.id)}>Eliminar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> 
-        {isModalOpen && (
-          <div className="modal">
-
-<form onSubmit={handleResetPassword} className='modal-form'>
-  <label className="input-titles-modal">Nueva contraseña:</label>
-  <input type="password" name="newPassword" value={newPassword} onChange={handleNewPasswordChange} className="user-input" />
-  <input type="submit" value="Confirmar" className="submit-btn-modal" />
-</form>
-</div>
-      )}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <button className='close-ses'onClick={() => navigate("/create-usuario")}>+ Agregar Usuarios</button>
+            <table className='table-users'>
+              <thead>
+                <tr className='table-titles' border="1">
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Perfil</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user, index) => (
+                  <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#FAF8F8' : '#FFFFFF' }}>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{user.profile || "admin"}</td>
+                    <td>
+                      <button className='pass-table-btn' onClick={() => handleOpenModal(user.id)}>Reestablecer contraseña</button>
+                      <button className='table-btn' onClick={() => navigate(`/editar-usuario/${user.id}`)}>Editar</button>
+                      <button className='table-btn' onClick={() => deleteUser(user.id)}>Eliminar</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table> 
+            {isModalOpen && (
+              <div className="modal">
+                <form onSubmit={handleResetPassword} className='modal-form'>
+                  <label className="input-titles-modal">Nueva contraseña:</label>
+                  <input type="password" name="newPassword" value={newPassword} onChange={handleNewPasswordChange} className="user-input" />
+                  <input type="submit" value="Confirmar" className="submit-btn-modal" />
+                </form>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );
