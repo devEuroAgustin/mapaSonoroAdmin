@@ -14,7 +14,7 @@ function Loader() {
     }}>
       <div style={{
         border: '16px solid #f3f3f3',
-        borderTop: '16px solid #3498db',
+        borderTop: '16px solid black',
         borderRadius: '50%',
         width: '60px',
         height: '60px',

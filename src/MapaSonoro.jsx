@@ -3,13 +3,29 @@ import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import radioButton from '../src/assets/radioButton.svg';
 import Loader from './utils/Loader';
+import ModalMapa from './ModalMapa';
+
 function ModuloPuntos() {
   const user = JSON.parse(localStorage.getItem('user'));
   const username = user ? user.username : '';
   const navigate = useNavigate();
   const [puntos, setPuntos] = useState([]);
   const [isLoading, setIsLoading] = useState(true); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
+
+  const handlePuntoClick = (punto) => {
+    setModalData(punto);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalData(null);
+  };
+  
   useEffect(() => {
     fetch('https://mapaapi.onrender.com/api/points/')
       .then(response => response.json())
@@ -42,11 +58,22 @@ function ModuloPuntos() {
                   <div 
                     key={index} 
                     className="punto" 
-                    style={{top: coordenadas.top, left: coordenadas.left}} 
+                    style={{top: coordenadas.top, left: coordenadas.left, backgroundImage: `url(${radioButton})`}} 
                     data-name={punto.nombre_es}
+                    onClick={() => handlePuntoClick(punto)}
                   ></div>
                 );
               })}
+    {isModalOpen && modalData && (
+      <ModalMapa onClose={closeModal}>
+        <div style={{display: "flex"}}>
+          <img src={radioButton} />
+        <h2 className='nombre-modal-mapa'>{modalData.nombre_es}</h2>
+        </div>
+        <p className='descripcion-modal-mapa'>{modalData.descripcion_es}</p>
+        {/* <p className='description-modal-mapa'>{modalData.descripcion_eng}</p> */}
+      </ModalMapa>
+    )}
             </div>
             <button className='close-ses'onClick={() => navigate('/agregar-punto')}>+ Agregar punto</button>
             <table className='table-users'>

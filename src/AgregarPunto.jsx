@@ -121,8 +121,13 @@ function AgregarPunto() {
       <input type="text" name="descripcion_eng" value={descripcion_eng} onChange={handleChange} className="edit-multi-input" />
     </div>
     <div className="input-field">
-      <label className="input-titles-edit-usuario">Type:</label>
-      <input type="text" name="type" value={type} onChange={handleChange} className="edit-multi-input" />
+    <label className="input-titles-edit-usuario">Type:</label>
+              <select name="type" value={type} onChange={handleChange} className="edit-multi-input">
+              <option value="">Selecciona un tipo</option>
+              <option value="Montaña">Montaña</option>
+              <option value="sierra">sierra</option>
+              <option value="planicie">planicie</option>
+            </select>
     </div>
   </div>
 </form>
