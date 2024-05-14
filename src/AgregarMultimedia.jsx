@@ -19,14 +19,14 @@ const [usuarios, setUsuarios] = useState([]);
 
 
   const handleChange = (event) => {
-    const { name, value, checked, type } = event.target;
+    const { name, value, checked, type, files } = event.target;
 
     switch (name) {
         case 'nombre_eng':
           setNombreEng(value);
           break;
         case 'ruta_archivo':
-          setRutaArchivo(value);
+          setRutaArchivo(files[0]);
           break;
         case 'hora':
           setHora(value);
@@ -56,23 +56,24 @@ const [usuarios, setUsuarios] = useState([]);
     event.preventDefault();
 
 
-    const userData = {
-        nombre_eng: nombre_eng,
-        ruta_archivo: ruta_archivo,
-        hora: hora,
-        nombre_es: nombre_es,
-        punto_id: punto_id,
-        user_id: user_id,
-        type: type,
-        destacado: destacado
-      };
+    
+      const formData = new FormData();
+      formData.append('nombre_eng', nombre_eng);
+      formData.append('ruta_archivo', ruta_archivo);
+      formData.append('hora', hora);
+      formData.append('nombre_es', nombre_es);
+      formData.append('punto_id', punto_id);
+      formData.append('user_id', user_id);
+      formData.append('type', type);
+      formData.append('destacado', destacado);
+    
+
+
+      
 
     fetch(`https://mapaapi.onrender.com/api/multi/create/`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(formData)
     })
     .then(response => response.json())
     .then(data => {
@@ -111,9 +112,9 @@ const [usuarios, setUsuarios] = useState([]);
       <input type="text" name="nombre_eng" value={nombre_eng} onChange={handleChange} className="edit-multi-input" />
     </div>
     <div className="input-field">
-      <label className="input-titles-edit-usuario">Ruta del archivo:</label>
-      <input type="text" name="ruta_archivo" value={ruta_archivo} onChange={handleChange} className="edit-multi-input" />
-    </div>
+  <label className="input-titles-edit-usuario">Ruta del archivo:</label>
+  <input type="file" name="ruta_archivo" onChange={handleChange} className="edit-multi-input" />
+</div>
     <div className="input-field">
       <label className="input-titles-edit-usuario">Hora:</label>
       <input type="text" name="hora" value={hora} onChange={handleChange} className="edit-multi-input" />
