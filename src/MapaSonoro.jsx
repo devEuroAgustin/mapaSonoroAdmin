@@ -58,7 +58,7 @@ function ModuloPuntos() {
                   <div 
                     key={index} 
                     className="punto" 
-                    style={{top: coordenadas.top, left: coordenadas.left, backgroundImage: `url(${radioButton})`}} 
+                    style={{top: coordenadas.top, left: coordenadas.left, backgroundImage: `url('../src/assets/radioButton.svg')`}} 
                     data-name={punto.nombre_es}
                     onClick={() => handlePuntoClick(punto)}
                   ></div>
