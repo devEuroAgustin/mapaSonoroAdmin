@@ -506,3 +506,14 @@ color: #707070;
 opacity: 1;
 margin-left: 3px;
 }
+.save-btn-point {
+  width: 118px;
+  height: 38px;
+  color: white;
+  background: #000000 0% 0% no-repeat padding-box;
+  border-radius: 19px;
+  border-color: #0000;
+  margin-top: 36px;
+  opacity: 1;
+  font-size: 19px;
+}

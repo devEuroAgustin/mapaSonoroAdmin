@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './HeaderBackoffice';
+import radioButton from '../src/assets/radioButton.svg';
 import ControlPanel from './ControlPanel';
 
 function AgregarPunto() {
@@ -77,14 +78,33 @@ function AgregarPunto() {
     })
     .catch(error => console.error('Error:', error));
   };
+  const handleMapClick = (event) => {
+    const rect = event.target.getBoundingClientRect();
+    const x = event.clientX - rect.left; //x position within the element.
+    const y = event.clientY - rect.top;  //y position within the element.
+    setCoordenadas(`{"top":"${y}px", "left":"${x}px"}`);
+  };
+  let coordenadasObj = {};
+  try {
+    coordenadasObj = JSON.parse(coordenadas);
+  } catch (error) {
+    console.error('Error al parsear las coordenadas:', error);
+  }
 
- 
   return (
     <div className="dashboard">
       <Header username={username1} />
       <ControlPanel />
       <div className="main-content">
-<button className='save-btn' type="submit" form="editForm">Guardar</button>
+      <div className='mapa' onClick={handleMapClick}>  
+  <div 
+    className="punto" 
+    style={{top: coordenadasObj.top, left: coordenadasObj.left, backgroundImage: `url(${radioButton})`}} 
+    data-name={nombre_es}
+
+  ></div>
+  </div>
+<button className='save-btn-point' type="submit" form="editForm">Guardar</button>
         <hr />
         <form id="editForm" onSubmit={handleSubmit} className='edit-form'>
   <div className="input-row">

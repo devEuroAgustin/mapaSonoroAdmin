@@ -105,6 +105,7 @@ const [isLoading, setIsLoading] = useState(true);
           <Loader />
         ) : (
           <>
+          
         <button className='save-btn' type="submit" form="editForm">Guardar</button>
         <hr />
         <form id="editForm" onSubmit={handleSubmit} className='edit-form'>

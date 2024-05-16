@@ -16,7 +16,14 @@ const [punto_id, setPuntoId] = useState('');
 const [user_id, setUserId] = useState('');
 const [puntos, setPuntos] = useState([]);
 const [usuarios, setUsuarios] = useState([]);
+const [isSubmitting, setIsSubmitting] = useState(false);
+useEffect(() => {
+  console.log(punto_id);
+}, [punto_id]);
 
+useEffect(() => {
+  console.log(user_id);
+}, [user_id]);
 
   const handleChange = (event) => {
     const { name, value, checked, type, files } = event.target;
@@ -25,8 +32,10 @@ const [usuarios, setUsuarios] = useState([]);
         case 'nombre_eng':
           setNombreEng(value);
           break;
-        case 'ruta_archivo':
+        case 'archivo':
+          console.log(files)
           setRutaArchivo(files[0]);
+          console.log(ruta_archivo)
           break;
         case 'hora':
           setHora(value);
@@ -41,10 +50,12 @@ const [usuarios, setUsuarios] = useState([]);
             setDestacado(type === 'checkbox' ? checked : value);
           break;
           case 'punto_id':
-            setPuntoId(parseInt(value, 10));
+            setPuntoId(parseInt(value, 10) );
+            console.log(punto_id)
             break;
           case 'user_id':
             setUserId(parseInt(value, 10));
+            console.log(user_id)
             break;
         default:
           break;
@@ -54,12 +65,12 @@ const [usuarios, setUsuarios] = useState([]);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setIsSubmitting(true);
 
     
       const formData = new FormData();
       formData.append('nombre_eng', nombre_eng);
-      formData.append('ruta_archivo', ruta_archivo);
+      formData.append('archivo', ruta_archivo);
       formData.append('hora', hora);
       formData.append('nombre_es', nombre_es);
       formData.append('punto_id', punto_id);
@@ -69,19 +80,29 @@ const [usuarios, setUsuarios] = useState([]);
     
 
 
-      
+    
 
     fetch(`https://mapaapi.onrender.com/api/multi/create/`, {
       method: 'POST',
-      body: JSON.stringify(formData)
+      body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(error => {
+          throw new Error(`HTTP error! status: ${response.status}, message: ${error.message}`);
+        });
+      }
+      return response.json();
+    })
     .then(data => {
       console.log(data);
+      setIsSubmitting(false);
       navigate('/multimedia             ');
     })
     .catch(error => console.error('Error:', error));
+    setIsSubmitting(false);
   };
+  
   useEffect(() => {
     // Obtener los puntos
     fetch('https://mapaapi.onrender.com/api/points')
@@ -105,7 +126,7 @@ const [usuarios, setUsuarios] = useState([]);
   <div className="main-content">
     <button className='save-btn' type="submit" form="editForm">Guardar</button>
     <hr />
-    <form id="editForm" onSubmit={handleSubmit}className='edit-form'>
+    <form id="editForm" onSubmit={handleSubmit} disabled={isSubmitting} className='edit-form'>
     <div className="input-row">
     <div className="input-field">
       <label className="input-titles-edit-usuario">Nombre en inglés:</label>
@@ -113,7 +134,7 @@ const [usuarios, setUsuarios] = useState([]);
     </div>
     <div className="input-field">
   <label className="input-titles-edit-usuario">Ruta del archivo:</label>
-  <input type="file" name="ruta_archivo" onChange={handleChange} className="edit-multi-input" />
+  <input type="file" name="archivo" onChange={handleChange} className="edit-multi-input" />
 </div>
     <div className="input-field">
       <label className="input-titles-edit-usuario">Hora:</label>
@@ -152,11 +173,11 @@ const [usuarios, setUsuarios] = useState([]);
     </div>
     <div className="input-field">
       <label className="input-titles-edit-usuario">User ID:</label>
-      <select name="punto_id" value={user_id} onChange={handleChange} className="edit-multi-input">
-  {usuarios.map(punto => (
-    <option key={punto.id} value={punto.id}>
-      {punto.username}
-    </option>
+      <select name="user_id" value={user_id} onChange={handleChange} className="edit-multi-input">
+      {usuarios.map(usuario => (
+      <option key={usuario.id} value={usuario.id}>
+        {usuario.username}
+      </option>
   ))}
 </select>
     </div>
