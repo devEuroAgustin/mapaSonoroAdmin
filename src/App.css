@@ -517,3 +517,6 @@ margin-left: 3px;
   opacity: 1;
   font-size: 19px;
 }
+.punto{
+  background-image: url('../src/assets/radioButton.png');
+}

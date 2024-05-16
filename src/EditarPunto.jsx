@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from './HeaderBackoffice';
-import radioButton from './assets/radioButton.svg';
+import radioButton from './assets/radioButton.png';
 import ControlPanel from './ControlPanel';
 import Loader from './utils/Loader';
 function EditarPunto() {

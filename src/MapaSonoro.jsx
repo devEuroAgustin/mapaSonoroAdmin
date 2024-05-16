@@ -3,7 +3,7 @@ import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import radioButton from './assets/radioButton.svg';
+import radioButton from './assets/radioButton.png';
 import Loader from './utils/Loader';
 import ModalMapa from './ModalMapa';
 
@@ -58,7 +58,7 @@ function ModuloPuntos() {
                   <div 
                     key={index} 
                     className="punto" 
-                    style={{top: coordenadas.top, left: coordenadas.left, backgroundImage: `url('../src/assets/radioButton.png')`}} 
+                    style={{top: coordenadas.top, left: coordenadas.left, backgroundImage: `url(${radioButton})`}} 
                     data-name={punto.nombre_es}
                     onClick={() => handlePuntoClick(punto)}
                   ></div>
