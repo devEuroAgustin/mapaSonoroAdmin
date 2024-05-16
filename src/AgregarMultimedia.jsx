@@ -164,6 +164,7 @@ useEffect(() => {
     <div className="input-field">
       <label className="input-titles-edit-usuario">Punto ID:</label>
       <select name="punto_id" value={punto_id} onChange={handleChange} className="edit-multi-input">
+      <option value="">Selecciona uno</option>
   {puntos.map(punto => (
     <option key={punto.id} value={punto.id}>
       {punto.nombre_es}
@@ -174,6 +175,7 @@ useEffect(() => {
     <div className="input-field">
       <label className="input-titles-edit-usuario">User ID:</label>
       <select name="user_id" value={user_id} onChange={handleChange} className="edit-multi-input">
+      <option value="">Selecciona uno</option>
       {usuarios.map(usuario => (
       <option key={usuario.id} value={usuario.id}>
         {usuario.username}
