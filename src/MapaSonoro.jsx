@@ -3,7 +3,7 @@ import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import radioButton from '../src/assets/radioButton.svg';
+import radioButton from './assets/radioButton.svg';
 import Loader from './utils/Loader';
 import ModalMapa from './ModalMapa';
 

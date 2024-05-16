@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './HeaderBackoffice';
-import radioButton from '../src/assets/radioButton.svg';
+import radioButton from './assets/radioButton.svg';
 import ControlPanel from './ControlPanel';
 
 function AgregarPunto() {
