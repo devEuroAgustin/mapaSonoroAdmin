@@ -6,6 +6,7 @@ function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -19,39 +20,40 @@ function Login() {
   };
 
   const handleSubmit = (event) => {
-    
     event.preventDefault();
     setIsSubmitting(true); 
-  const userData = {
-    username: username,
-    password: password
+    setErrorMessage(''); // Limpiar el mensaje de error
+    const userData = {
+      username: username,
+      password: password
+    };
+  
+    // Hacer una solicitud POST al endpoint de inicio de sesión
+    fetch('https://mapaapi.onrender.com/api/clients/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      setIsSubmitting(false);
+      if (data.message) {
+        handleServerResponse(data.message); 
+      } else {
+        localStorage.setItem('user', JSON.stringify(data));
+        navigate('/dashboard');
+      }
+    })
+    .catch(error => {
+      setIsSubmitting(false);
+      console.error('Error:', error);
+    });
   };
-
-  // Hacer una solicitud POST al endpoint de inicio de sesión
-  fetch('https://mapaapi.onrender.com/api/clients/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  })
-  .then(response => response.json())
-  .then(data => {
-    setIsSubmitting(false);
-    if (data.message) {
-
-      console.error(data.message);
-    } else {
-      localStorage.setItem('user', JSON.stringify(data));
-      navigate('/dashboard');
-    }
-  })
-  .catch(error => {
-    setIsSubmitting(false);
-    console.error('Error:', error);
-  });
-  };
-
+  function handleServerResponse(response) {
+    setErrorMessage(response);
+}
   return (
     <div className="container">
 <div className="login-container">
@@ -74,6 +76,7 @@ function Login() {
 </div>
 
     <input type="submit"disabled={isSubmitting} value="Ingresar al sistema" className='submit-btn'/>
+    {errorMessage && <p className="error-message">{errorMessage}</p>}
     <Link to="/recover-password" className='lost-pass'>Olvide mi contraseña</Link>
   </form>
 </div>

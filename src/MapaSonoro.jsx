@@ -40,7 +40,8 @@ function ModuloPuntos() {
     <div className="dashboard">
       <Header username={username} />
       <ControlPanel />
-  
+
+
       <div className="main-content">
         {isLoading ? (
           <Loader />

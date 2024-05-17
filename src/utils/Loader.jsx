@@ -8,8 +8,8 @@ function Loader() {
       
         /* centrar vertical y horizontalmente */
         position: "absolute",
-        top: "-20%",
-        left: "50%",
+        top: "20vh",
+        left: "50vw",
         margin: "205px 0px 0px -165px", 
     }}>
       <div style={{

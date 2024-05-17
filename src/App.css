@@ -215,12 +215,15 @@ margin-right: 20px;
   margin-top: 120px;
   display: flex;
   justify-content: center;
+}.main-content-wrapper {
+  position: absolute;
+  top: 20vh; /* Ajusta estos valores según tus necesidades */
+  left: 20vw; /* Ajusta estos valores según tus necesidades */
 }
 .main-content {
-  position: relative;
-  top: -38rem;
-  left: 273px;
-
+  position: absolute;
+  top: 20vh; 
+  left: 20vw; 
   
 }
 th{
@@ -519,4 +522,22 @@ margin-left: 3px;
 }
 .punto{
   background-image: url('../src/assets/radioButton.png');
+}
+.error-message {
+  text-align: center;
+  font: normal normal normal 14px / 6px Arial;
+  letter-spacing: 0px;
+  color: red;
+  opacity: 1;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+button:active {
+  transform: scale(0.95); /* Hace que el botón se reduzca ligeramente cuando se hace clic */
+}
+button:active {
+  background-color: #555; /* Cambia el color de fondo */
+  color: #fff; /* Cambia el color del texto */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Añade una sombra de caja interna */
 }
