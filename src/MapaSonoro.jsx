@@ -68,7 +68,7 @@ function ModuloPuntos() {
     {isModalOpen && modalData && (
       <ModalMapa onClose={closeModal}>
         <div style={{display: "flex"}}>
-          <img src={radioButton} />
+          <img src={radioButton}  className='radioButton'/>
         <h2 className='nombre-modal-mapa'>{modalData.nombre_es}</h2>
         </div>
         <p className='descripcion-modal-mapa'>{modalData.descripcion_es}</p>
