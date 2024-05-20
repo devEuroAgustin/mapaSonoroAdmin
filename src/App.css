@@ -6,7 +6,10 @@
     display: flex;
     flex-direction: column
 }
-
+html {
+  max-height: 2000px; /* Limita la altura del cuerpo a 2000px */
+  overflow:initial; /* Permite el desplazamiento si el contenido se desborda */
+}
 
 .container {
   display: flex;
@@ -195,14 +198,19 @@ margin-right: 20px;
 }
 
 .control-panel {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 2000px;
   width: 200px;
+  top: 120px;
   margin-top: -20px;
   padding: 10px;
   flex-grow: 1;
+  border-right: 1px solid #bcbcbc;
+  overflow: hidden;
 }
+
 
 .control-panel a {
   margin-top: 20px;
@@ -229,9 +237,7 @@ margin-right: 20px;
   position: absolute;
   top: 20vh; 
   left: 20vw; 
-  padding-left: 20px;
-  padding-bottom: 200px;
-  border-left: 1px solid #bcbcbc;
+
 }
 th{
   font: normal normal normal 16px/18px Arial;
@@ -445,6 +451,8 @@ margin-left: 20px;
   width: 102%;
   border-bottom: 1px solid #bcbcbc;
   margin-right: -2px;
+  z-index: 2;
+  background: white;
 }
 button {
   cursor: pointer;
@@ -479,9 +487,8 @@ a.active {
     position: absolute;
     top: 10vh;
     left: 20vw;
-    padding-left: 20px;
-    padding-bottom: 200px;
-    border-left: 1px solid #bcbcbc;
+
+   
   }
 }
 .modalmapa {
