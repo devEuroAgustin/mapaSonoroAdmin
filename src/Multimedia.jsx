@@ -8,14 +8,17 @@ import iconImg from './assets/img.svg';
 import iconShare from './assets/compartir.svg';
 import { useState, useEffect } from 'react';
 import Loader from './utils/Loader';
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+    
 function ModuloMulti() {
   const user = JSON.parse(localStorage.getItem('user'));
   const [multimedia, setMultimedia] = useState([]);
   const username = user ? user.username : '';
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+const [selectedImage, setSelectedImage] = useState(null); 
 
   const fetchMultimedia = async () => {
     try {
@@ -46,7 +49,14 @@ function ModuloMulti() {
   useEffect(() => {
     fetchMultimedia();
   }, []);
-
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setShowModal(true);
+  };
+  
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <div className="dashboard">
       <Header username={username} />
@@ -83,7 +93,21 @@ function ModuloMulti() {
                       />
                     </td>
                     <td>
-                      <img src={iconShare} alt="Compartir" />
+                    <a onClick={() => handleImageClick(`${item.ruta_archivo}`)}>
+  <img src={iconShare} alt="Compartir" />
+</a>
+{showModal && (
+  <div className="modal-imagen">
+      <a onClick={handleCloseModal} style={{
+  display: 'flex',
+  textDecoration: 'none',
+  color: 'black',
+  cursor: 'pointer',
+    flexDirection: "row-reverse"
+}}><FontAwesomeIcon icon={faTimes} /></a>
+    <img className="modal-content-imagen" src={selectedImage} />
+  </div>
+)}
                       <button className='table-btn' onClick={() => navigate(`/editar-multimedia/${item.id}`)}>Editar</button>
                       <button className='table-btn' onClick={() => deleteMultimedia(item.id)}>Eliminar</button>
                     </td>

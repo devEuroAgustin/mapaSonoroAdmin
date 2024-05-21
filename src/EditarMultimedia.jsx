@@ -4,17 +4,16 @@ import Header from './HeaderBackoffice';
 import ControlPanel from './ControlPanel';
 import Loader from './utils/Loader';
 
-
 function EditarMultimedia() {
   const user = JSON.parse(localStorage.getItem('user'));
   const username1 = user ? user.username : '';
-const [nombre_eng, setNombreEng] = useState("");
-const [ruta_archivo, setRutaArchivo] = useState('');
-const [hora, setHora] = useState( '');
-const [nombre_es, setNombreEs] = useState('');
-const [type, setType] = useState('');
-const [destacado, setDestacado] = useState(false);
-const [isLoading, setIsLoading] = useState(true); 
+  const [nombre_eng, setNombreEng] = useState("");
+  const [ruta_archivo, setRutaArchivo] = useState(null);
+  const [hora, setHora] = useState( '');
+  const [nombre_es, setNombreEs] = useState('');
+  const [type, setType] = useState('');
+  const [destacado, setDestacado] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); 
   const { id } = useParams();
 
   useEffect(() => {
@@ -39,8 +38,8 @@ const [isLoading, setIsLoading] = useState(true);
         case 'nombre_eng':
           setNombreEng(value);
           break;
-        case 'ruta_archivo':
-          setRutaArchivo(value);
+        case 'archivo':
+          setRutaArchivo(event.target.files[0]);
           break;
         case 'hora':
           setHora(value);
@@ -63,27 +62,22 @@ const [isLoading, setIsLoading] = useState(true);
   const handleSubmit = (event) => {
     event.preventDefault();
 
-
-    const userData = {
-        nombre_eng: nombre_eng,
-        ruta_archivo: ruta_archivo,
-        hora: hora,
-        nombre_es: nombre_es,
-        type: type,
-        destacado: destacado
-      };
+    const formData = new FormData();
+    formData.append('nombre_eng', nombre_eng);
+    formData.append('archivo', ruta_archivo);
+    formData.append('hora', hora);
+    formData.append('nombre_es', nombre_es);
+    formData.append('type', type);
+    formData.append('destacado', destacado);
 
     fetch(`https://mapaapi.onrender.com/api/multi/update/${id}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
+      body: formData
     })
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      navigate('/multimedia             ');
+      navigate('/multimedia');
     })
     .catch(error => console.error('Error:', error));
   };
@@ -99,7 +93,7 @@ const [isLoading, setIsLoading] = useState(true);
           <>
             <button className='save-btn' type="submit" form="editForm">Guardar</button>
             <hr />
-            <form id="editForm" onSubmit={handleSubmit} className='edit-form'>
+            <form id="editForm" onSubmit={handleSubmit} className='edit-form' encType="multipart/form-data">
               <div className="input-row">
                 <div className="input-field">
                   <label className="input-titles-edit-usuario">Nombre en inglés:</label>
@@ -107,7 +101,7 @@ const [isLoading, setIsLoading] = useState(true);
                 </div>
                 <div className="input-field">
                   <label className="input-titles-edit-usuario">Ruta del archivo:</label>
-                  <input type="text" name="ruta_archivo" value={ruta_archivo} onChange={handleChange} className="edit-multi-input" />
+                  <input type="file" name="archivo" onChange={handleChange} className="edit-multi-input" />
                 </div>
                 <div className="input-field">
                   <label className="input-titles-edit-usuario">Hora:</label>
