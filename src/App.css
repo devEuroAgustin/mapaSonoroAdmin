@@ -235,8 +235,8 @@ margin-right: 20px;
 }
 .main-content {
   position: absolute;
-  top: 13vh;
-  left: 16vw;
+  top: 14vh;
+  left: 18vw;
 }
 
 th{
@@ -476,8 +476,11 @@ button:hover {
 
 .punto::after {
   content: attr(data-name);
-  position: absolute;
-  left: -17px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0px;
   top: 14px;
   white-space: nowrap;
 }
