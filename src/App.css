@@ -235,7 +235,7 @@ margin-right: 20px;
 }
 .main-content {
   position: absolute;
-  top: 14vh;
+  top: 15vh;
   left: 18vw;
 }
 
@@ -483,6 +483,7 @@ button:hover {
   left: 0px;
   top: 14px;
   white-space: nowrap;
+  color: white;
 }
 a.active {
   font-weight: bold;
