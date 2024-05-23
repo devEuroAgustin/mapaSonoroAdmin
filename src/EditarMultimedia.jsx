@@ -9,11 +9,12 @@ function EditarMultimedia() {
   const username1 = user ? user.username : '';
   const [nombre_eng, setNombreEng] = useState("");
   const [ruta_archivo, setRutaArchivo] = useState(null);
-  const [hora, setHora] = useState( '');
+  let [hora, setHora] = useState( '');
   const [nombre_es, setNombreEs] = useState('');
   const [type, setType] = useState('');
   const [destacado, setDestacado] = useState(false);
   const [isLoading, setIsLoading] = useState(true); 
+  const [fileName, setFileName] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,7 +23,12 @@ function EditarMultimedia() {
       .then(data => {
         setNombreEng(data.nombre_eng || '');
         setRutaArchivo(data.ruta_archivo || '');
-        setHora(data.hora || '');
+        
+        // Formatea la fecha y hora
+        const date = new Date(data.hora);
+        const formattedDate = date.toISOString().substring(0, 16);
+        setHora(formattedDate || '');
+        
         setNombreEs(data.nombre_es || '');
         setType(data.type || '');
         setDestacado(data.destacado || false);
@@ -40,8 +46,10 @@ function EditarMultimedia() {
           break;
         case 'archivo':
           setRutaArchivo(event.target.files[0]);
+          setFileName(event.target.files[0].name);
           break;
         case 'hora':
+          console.log(value)
           setHora(value);
           break;
         case 'nombre_es':
@@ -62,6 +70,7 @@ function EditarMultimedia() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    hora = new Date(hora).toISOString();
     const formData = new FormData();
     formData.append('nombre_eng', nombre_eng);
     formData.append('archivo', ruta_archivo);
@@ -98,16 +107,20 @@ function EditarMultimedia() {
                 <div className="input-field">
                   <label className="input-titles-edit-usuario">Nombre en inglés:</label>
                   <input type="text" name="nombre_eng" value={nombre_eng} onChange={handleChange} className="edit-multi-input" />
-                </div>
-                <div className="input-field">
-                  <label className="input-titles-edit-usuario">Ruta del archivo:</label>
-                  <input type="file" name="archivo" onChange={handleChange} className="edit-multi-input" />
-                </div>
-                <div className="input-field">
-                  <label className="input-titles-edit-usuario">Hora:</label>
-                  <input type="text" name="hora" value={hora} onChange={handleChange} className="edit-multi-input" />
-                </div>
-              </div>
+                  </div>
+    <div className="input-field">
+  <label className="input-titles-edit-usuario">Archivo:</label>
+  <input type="file" id="archivo" name="archivo" onChange={handleChange} className="edit-multi-input-file" />
+  <label for="archivo" class="custom-file-upload">
+  <p>Subir archivo</p>
+{fileName && <span className='sub-text'>Archivo seleccionado: {fileName}</span>}
+</label>
+  </div>
+<div className="input-field">
+  <label className="input-titles-edit-usuario">Fecha y hora:</label>
+  <input type="datetime-local" name="hora" value={hora} onChange={handleChange} className="edit-multi-input" />
+</div>
+</div>
               <div className="input-row">
                 <div className="input-field">
                   <label className="input-titles-edit-usuario">Nombre en español:</label>

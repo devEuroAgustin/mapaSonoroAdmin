@@ -8,7 +8,7 @@ function AgregarMultimedia() {
   const username1 = user ? user.username : '';
 const [nombre_eng, setNombreEng] = useState("");
 const [ruta_archivo, setRutaArchivo] = useState('');
-const [hora, setHora] = useState( '');
+let [hora, setHora] = useState( '');
 const [nombre_es, setNombreEs] = useState('');
 const [type, setType] = useState('');
 const [destacado, setDestacado] = useState(false);
@@ -17,6 +17,8 @@ const [user_id, setUserId] = useState('');
 const [puntos, setPuntos] = useState([]);
 const [usuarios, setUsuarios] = useState([]);
 const [isSubmitting, setIsSubmitting] = useState(false);
+const [fileName, setFileName] = useState('');
+
 useEffect(() => {
   console.log(punto_id);
 }, [punto_id]);
@@ -35,6 +37,7 @@ useEffect(() => {
         case 'archivo':
           console.log(files)
           setRutaArchivo(files[0]);
+          setFileName(event.target.files[0].name);
           console.log(ruta_archivo)
           break;
         case 'hora':
@@ -67,7 +70,8 @@ useEffect(() => {
     event.preventDefault();
     setIsSubmitting(true);
 
-    
+    hora = new Date(hora).toISOString();
+
       const formData = new FormData();
       formData.append('nombre_eng', nombre_eng);
       formData.append('archivo', ruta_archivo);
@@ -133,14 +137,18 @@ useEffect(() => {
       <input type="text" name="nombre_eng" value={nombre_eng} onChange={handleChange} className="edit-multi-input" />
     </div>
     <div className="input-field">
-  <label className="input-titles-edit-usuario">Ruta del archivo:</label>
-  <input type="file" name="archivo" onChange={handleChange} className="edit-multi-input" />
-</div>
-    <div className="input-field">
-      <label className="input-titles-edit-usuario">Hora:</label>
-      <input type="text" name="hora" value={hora} onChange={handleChange} className="edit-multi-input" />
-    </div>
+  <label className="input-titles-edit-usuario">Archivo:</label>
+  <input type="file" id="archivo" name="archivo" onChange={handleChange} className="edit-multi-input-file" />
+  <label for="archivo" class="custom-file-upload">
+  <p>Subir archivo</p>
+{fileName && <span className='sub-text'>Archivo seleccionado: {fileName}</span>}
+</label>
   </div>
+<div className="input-field">
+  <label className="input-titles-edit-usuario">Fecha y hora:</label>
+  <input type="datetime-local" name="hora" value={hora} onChange={handleChange} className="edit-multi-input" />
+</div>
+</div>
   <div className="input-row">
     <div className="input-field">
       <label className="input-titles-edit-usuario">Nombre en español:</label>
