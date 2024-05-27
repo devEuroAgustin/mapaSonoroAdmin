@@ -15,6 +15,7 @@ function ModuloPuntos() {
   const [isLoading, setIsLoading] = useState(true); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const [nameVisibility, setNameVisibility] = useState(true);
 
   const handlePuntoClick = (punto) => {
     setModalData(punto);
@@ -47,6 +48,7 @@ function ModuloPuntos() {
           <Loader />
         ) : (
           <>
+
             <div className='mapa'>
               {puntos.map((punto, index) => {
                 let coordenadas = {};
@@ -55,12 +57,13 @@ function ModuloPuntos() {
                 } catch (error) {
                   console.error('Error al parsear las coordenadas:', error);
                 }
+                const dataNameAttribute = nameVisibility ? punto.nombre_es : undefined;
                 return (
                   <div 
                     key={index} 
                     className="punto" 
                     style={{top: coordenadas.top, left: coordenadas.left, backgroundImage: `url(${radioButton})`}} 
-                    data-name={punto.nombre_es}
+                    data-name={dataNameAttribute}
                     onClick={() => handlePuntoClick(punto)}
                   ></div>
                 );
@@ -77,6 +80,7 @@ function ModuloPuntos() {
     )}
             </div>
             <button className='close-ses'onClick={() => navigate('/agregar-punto')}>+ Agregar punto</button>
+            <button className='close-ses' onClick={() => setNameVisibility(prevState => !prevState)}>Ocultar nombres</button>
             <table className='table-users'>
               <thead>
                 <tr className='table-titles' border="1">
