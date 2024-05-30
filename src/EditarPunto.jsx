@@ -4,6 +4,7 @@ import Header from './HeaderBackoffice';
 import radioButton from './assets/radioButton.png';
 import ControlPanel from './ControlPanel';
 import Loader from './utils/Loader';
+
 function EditarPunto() {
   const user = JSON.parse(localStorage.getItem('user'));
   const username1 = user ? user.username : '';
@@ -152,24 +153,25 @@ const [isLoading, setIsLoading] = useState(true);
               <input type="text" name="coordenadas" value={coordenadas} onChange={handleChange} className="edit-multi-input" />
             </div>
             <div className="input-field">
-              <label className="input-titles-edit-usuario">Descripción ES:</label>
-              <input type="text" name="descripcion_es" value={descripcion_es} onChange={handleChange} className="edit-multi-input" />
-            </div>
-          </div>
-          <div className="input-row">
-            <div className="input-field">
-              <label className="input-titles-edit-usuario">Descripción ENG:</label>
-              <input type="text" name="descripcion_eng" value={descripcion_eng} onChange={handleChange} className="edit-multi-input" />
-            </div>
-            <div className="input-field">
-              <label className="input-titles-edit-usuario">Type:</label>
+    <label className="input-titles-edit-usuario">Type:</label>
               <select name="type" value={type} onChange={handleChange} className="edit-multi-input">
               <option value="">Selecciona un tipo</option>
               <option value="Montaña">Montaña</option>
               <option value="sierra">sierra</option>
               <option value="planicie">planicie</option>
             </select>
+    </div>
+          </div>
+          <div className="input-row">
+            <div className="input-field">
+              <label className="input-titles-edit-usuario">Descripción ENG:</label>
+              <textarea type="text" name="descripcion_eng" value={descripcion_eng} onChange={handleChange} className="edit-multi-input" />
             </div>
+            <div className="input-field">
+              <label className="input-titles-edit-usuario">Descripción ES:</label>
+              <textarea type="text" name="descripcion_es" value={descripcion_es} onChange={handleChange} className="edit-multi-input" />
+            </div>
+            
           </div>
         </form>
         </>

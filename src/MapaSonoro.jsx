@@ -81,7 +81,9 @@ function ModuloPuntos() {
     )}
             </div>
             <button className='close-ses'onClick={() => navigate('/agregar-punto')}>+ Agregar punto</button>
-            <button className='close-ses' onClick={() => setNameVisibility(prevState => !prevState)}>Ocultar nombres</button>  
+            <button className='close-ses' onClick={() => setNameVisibility(prevState => !prevState)}>
+  {nameVisibility ? 'Ocultar nombres' : 'Mostrar nombres'}
+</button>
             <table className='table-users'>
               <thead>
                 <tr className='table-titles' border="1">

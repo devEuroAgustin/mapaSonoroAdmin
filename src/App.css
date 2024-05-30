@@ -628,3 +628,7 @@ img.modal-content-imagen {
   display: flex;
   justify-content: center;
 }
+textarea.edit-multi-input {
+  width: 351px;
+  height: 148px;
+}
