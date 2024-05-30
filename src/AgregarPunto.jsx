@@ -15,6 +15,7 @@ function AgregarPunto() {
   const [descripcion_es, setDescripcionEs] = useState('');
   const [descripcion_eng, setDescripcionEng] = useState('');
   const [type, setType] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -52,6 +53,7 @@ function AgregarPunto() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     const puntoData = {
       nombre_es: nombre_es,
@@ -73,8 +75,10 @@ function AgregarPunto() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       navigate('/mapa-sonoro');
+      setIsSubmitting(false);
+      console.log(data);
+      
     })
     .catch(error => console.error('Error:', error));
   };
@@ -106,7 +110,7 @@ function AgregarPunto() {
   </div>
 <button className='save-btn-point' type="submit" form="editForm">Guardar</button>
         <hr />
-        <form id="editForm" onSubmit={handleSubmit} className='edit-form'>
+        <form id="editForm" onSubmit={handleSubmit} disabled={isSubmitting} className='edit-form'>
   <div className="input-row">
     <div className="input-field">
       <label className="input-titles-edit-usuario">Nombre en español:</label>
@@ -130,17 +134,7 @@ function AgregarPunto() {
       <label className="input-titles-edit-usuario">Coordenadas:</label>
       <input type="text" name="coordenadas" value={coordenadas} onChange={handleChange} className="edit-multi-input" />
     </div>
-    <div className="input-field">
-      <label className="input-titles-edit-usuario">Descripción ES:</label>
-      <input type="text" name="descripcion_es" value={descripcion_es} onChange={handleChange} className="edit-multi-input" />
-    </div>
-  </div>
-  <div className="input-row">
-    <div className="input-field">
-      <label className="input-titles-edit-usuario">Descripción ENG:</label>
-      <input type="text" name="descripcion_eng" value={descripcion_eng} onChange={handleChange} className="edit-multi-input" />
-    </div>
-    <div className="input-field">
+  <div className="input-field">
     <label className="input-titles-edit-usuario">Type:</label>
               <select name="type" value={type} onChange={handleChange} className="edit-multi-input">
               <option value="">Selecciona un tipo</option>
@@ -149,6 +143,18 @@ function AgregarPunto() {
               <option value="planicie">planicie</option>
             </select>
     </div>
+  </div>
+  <div className="input-row">
+    <div className="input-field">
+      <label className="input-titles-edit-usuario">Descripción ENG:</label>
+      <textarea type="text" name="descripcion_eng" value={descripcion_eng} onChange={handleChange} className="edit-multi-input" />
+    </div>
+    <div className="input-field">
+      <label className="input-titles-edit-usuario">Descripción ES:</label>
+      <textarea type="text" name="descripcion_es" value={descripcion_es} onChange={handleChange} className="edit-multi-input" />
+    </div>
+   
+    
   </div>
 </form>
       </div>

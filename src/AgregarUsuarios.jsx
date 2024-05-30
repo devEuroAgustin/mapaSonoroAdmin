@@ -11,6 +11,7 @@ function AgregarUsuario() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -40,6 +41,8 @@ function AgregarUsuario() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    setIsSubmitting(true);
+
     const userData = {
       nombre: nombre,
       apellido: apellido,
@@ -58,6 +61,7 @@ function AgregarUsuario() {
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      setIsSubmitting(false);
       navigate('/usuarios');
     })
     .catch(error => console.error('Error:', error));
@@ -70,7 +74,7 @@ function AgregarUsuario() {
       <div className="main-content">
         <button className='save-btn' type="submit" form="editForm">Guardar</button>
         <hr />
-        <form id="editForm" onSubmit={handleSubmit} className='edit-form'>
+        <form id="editForm" onSubmit={handleSubmit} disabled={isSubmitting} className='edit-form'>
           <div className="input-row">
             <div className="input-field">
               <label className="input-titles-edit-usuario">Nombre:</label>

@@ -71,7 +71,7 @@ useEffect(() => {
     setIsSubmitting(true);
 
     hora = new Date(hora).toISOString();
-
+console.log(hora)
       const formData = new FormData();
       formData.append('nombre_eng', nombre_eng);
       formData.append('archivo', ruta_archivo);
@@ -104,7 +104,6 @@ useEffect(() => {
       navigate('/multimedia             ');
     })
     .catch(error => console.error('Error:', error));
-    setIsSubmitting(false);
   };
   
   useEffect(() => {

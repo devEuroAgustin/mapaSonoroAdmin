@@ -4,6 +4,7 @@ import ControlPanel from './ControlPanel';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import radioButton from './assets/radioButton.png';
+import radioButtonBlack from './assets/radioButtonBlack.png';
 import Loader from './utils/Loader';
 import ModalMapa from './ModalMapa';
 
@@ -71,7 +72,7 @@ function ModuloPuntos() {
     {isModalOpen && modalData && (
       <ModalMapa onClose={closeModal}>
         <div style={{display: "flex"}}>
-          <img src={radioButton}  className='radioButton'/>
+          <img src={radioButtonBlack}  className='radioButton'/>
         <h2 className='nombre-modal-mapa'>{modalData.nombre_es}</h2>
         </div>
         <p className='descripcion-modal-mapa'>{modalData.descripcion_es}</p>
@@ -80,7 +81,7 @@ function ModuloPuntos() {
     )}
             </div>
             <button className='close-ses'onClick={() => navigate('/agregar-punto')}>+ Agregar punto</button>
-            <button className='close-ses' onClick={() => setNameVisibility(prevState => !prevState)}>Ocultar nombres</button>
+            <button className='close-ses' onClick={() => setNameVisibility(prevState => !prevState)}>Ocultar nombres</button>  
             <table className='table-users'>
               <thead>
                 <tr className='table-titles' border="1">
