@@ -98,14 +98,21 @@ const [selectedImage, setSelectedImage] = useState(null);
 </a>
 {showModal && (
   <div className="modal-imagen">
-      <a onClick={handleCloseModal} style={{
-  display: 'flex',
-  textDecoration: 'none',
-  color: 'black',
-  cursor: 'pointer',
-    flexDirection: "row-reverse"
-}}><FontAwesomeIcon icon={faTimes} /></a>
-    <img className="modal-content-imagen" src={selectedImage} />
+    <a onClick={handleCloseModal} style={{
+      display: 'flex',
+      textDecoration: 'none',
+      color: 'black',
+      cursor: 'pointer',
+      flexDirection: "row-reverse"
+    }}><FontAwesomeIcon icon={faTimes} /></a>
+    {selectedImage.endsWith('.jpg') || selectedImage.endsWith('.png') ? (
+      <img className="modal-content-imagen" src={selectedImage} />
+    ) : (
+      <audio controls>
+        <source src={selectedImage} type="audio/mpeg" />
+        Tu navegador no soporta el elemento de audio.
+      </audio>
+    )}
   </div>
 )}
                       <button className='table-btn' onClick={() => navigate(`/editar-multimedia/${item.id}`)}>Editar</button>
