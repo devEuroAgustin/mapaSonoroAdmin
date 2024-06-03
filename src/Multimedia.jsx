@@ -93,7 +93,7 @@ const [selectedImage, setSelectedImage] = useState(null);
                       />
                     </td>
                     <td>
-                    <a onClick={() => handleImageClick(`${item.ruta_archivo}`)}>
+                    <a onClick={() => navigator.clipboard.writeText(item.ruta_archivo)}>
   <img src={iconShare} alt="Compartir" />
 </a>
 {showModal && (
@@ -117,6 +117,9 @@ const [selectedImage, setSelectedImage] = useState(null);
 )}
                       <button className='table-btn' onClick={() => navigate(`/editar-multimedia/${item.id}`)}>Editar</button>
                       <button className='table-btn' onClick={() => deleteMultimedia(item.id)}>Eliminar</button>
+                      <button className='table-btn' onClick={() => handleImageClick(`${item.ruta_archivo}`)}>
+  {item.type === 'img' ? 'Visualizar' : 'Reproducir'}
+</button>
                     </td>
                   </tr>
                 ))}
