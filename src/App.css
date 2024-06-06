@@ -10,6 +10,9 @@ html {
   max-height: 2000px; /* Limita la altura del cuerpo a 2000px */
   overflow:initial; /* Permite el desplazamiento si el contenido se desborda */
 }
+body{
+  margin: 0px;
+}
 
 .container {
   display: flex;
@@ -631,4 +634,47 @@ img.modal-content-imagen {
 textarea.edit-multi-input {
   width: 351px;
   height: 148px;
+}
+.logo-fund{
+  width: 250px;
+  height: 70px;
+  margin-left: 50px;
+  margin-top: 10px;
+}
+.fund-title {
+  text-align: left;
+  font: normal normal normal 17px / 59px Arial;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+  margin-left: 10px;
+}
+.fund-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width: 102%;
+  background-color: #000000;
+  border-bottom: 1px solid #bcbcbc;
+  margin-right: -2px;
+}
+.flag {
+  width: 50px;
+  height: 37px;
+  margin-top: 28px;
+  opacity: 1;
+  margin-right: 20px;
+
+}
+.fund-content {
+  position: absolute;
+  top: 15vh;
+  left: 12vw;
+}
+@media screen and (min-width: 1920px) and (min-height: 1080px) {
+  .fund-content {
+    position: absolute;
+    top: 7vh;
+    left: 21vw;
+}
 }

@@ -14,6 +14,7 @@ import AgregarMultimedia from './AgregarMultimedia.jsx';
 import AgregarUsuario from './AgregarUsuarios.jsx';
 import AgregarPunto from './AgregarPunto.jsx';
 import EditarPunto from './EditarPunto.jsx';
+import Vodudahue from './Vodudahue.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -31,6 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/create-usuario" element={<AgregarUsuario />} />
         <Route path="/agregar-punto" element={<AgregarPunto />} />
         <Route path="/editar-punto/:id" element={<EditarPunto />} />
+        <Route path="/mapa-fundacion" element={<Vodudahue/>} />
       </Routes>
     </Router>
   </React.StrictMode>,
