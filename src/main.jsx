@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import App from './App.jsx'
 import RecoverPassword from './RecoverPassword.jsx'
 import Dashboard from './Dashboard.jsx';
@@ -33,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/agregar-punto" element={<AgregarPunto />} />
         <Route path="/editar-punto/:id" element={<EditarPunto />} />
         <Route path="/mapa-fundacion" element={<Vodudahue/>} />
+        <Route path="*" element={<Navigate to="/mapa-fundacion" />} />
       </Routes>
     </Router>
   </React.StrictMode>,
