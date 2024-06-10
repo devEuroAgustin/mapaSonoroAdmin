@@ -2,7 +2,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/mapa-fundacion"
+        "dest": "/src/Vodudahue.jsx"
       }
     ]
   }
