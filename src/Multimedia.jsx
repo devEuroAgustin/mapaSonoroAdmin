@@ -86,7 +86,7 @@ const [selectedImage, setSelectedImage] = useState(null);
                         src={
                           item.type === 'video' ? iconVideo :
                           item.type === 'audio' ? iconAudio :
-                          item.type === 'img' ? iconImg :
+                          item.type === 'image' ? iconImg :
                           null
                         } 
                         alt={item.type}
@@ -118,7 +118,7 @@ const [selectedImage, setSelectedImage] = useState(null);
                       <button className='table-btn' onClick={() => navigate(`/editar-multimedia/${item.id}`)}>Editar</button>
                       <button className='table-btn' onClick={() => deleteMultimedia(item.id)}>Eliminar</button>
                       <button className='table-btn' onClick={() => handleImageClick(`${item.ruta_archivo}`)}>
-  {item.type === 'img' ? 'Visualizar' : 'Reproducir'}
+  {item.type === 'image' ? 'Visualizar' : 'Reproducir'}
 </button>
                     </td>
                   </tr>

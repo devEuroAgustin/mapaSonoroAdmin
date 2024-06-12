@@ -71,7 +71,7 @@ function MapaMain() {
     useEffect(() => {
       if (Data) {
         console.log(Data)
-        let imgRegistro = Data.registros_multimedia.find(registro => registro.type === 'img');
+        let imgRegistro = Data.registros_multimedia.find(registro => registro.type === 'image');
         console.log(imgRegistro);
         if (imgRegistro) {
           setImgRutaArchivo(imgRegistro.ruta_archivo);
@@ -189,7 +189,13 @@ function MapaMain() {
     if (recurso.type === 'audio' ) {
       return recurso.type === 'audio' ? (
         <div key={recurso.id}>
-          <h3>{recurso.nombre_es}</h3>
+          <div style={{display:'flex'}}>
+          <h3 className='h3_fund'>{language === "English"
+                          ? recurso.nombre_eng
+                          : recurso.nombre_es}</h3>
+          {recurso?.moment_day && <p className='moment_day'>{recurso.moment_day}</p>}
+          </div>
+                         
           <audio controls>
             <source src={recurso.ruta_archivo} type="audio/mpeg" />
             Your browser does not support the audio element.

@@ -130,7 +130,7 @@ function EditarMultimedia() {
                   <label className="input-titles-edit-usuario">Tipo:</label>
                   <select name="type" value={type} onChange={handleChange} className="edit-multi-input">
                     <option value="">Selecciona un tipo</option>
-                    <option value="img">Imagen</option>
+                    <option value="image">Imagen</option>
                     <option value="video">Video</option>
                     <option value="audio">Audio</option>
                   </select>
