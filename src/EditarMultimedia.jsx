@@ -15,6 +15,8 @@ function EditarMultimedia() {
   const [destacado, setDestacado] = useState(false);
   const [isLoading, setIsLoading] = useState(true); 
   const [fileName, setFileName] = useState('');
+  const [momentDay, setMomentDay] = useState('');
+  const [season, setSeason] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
@@ -32,6 +34,8 @@ function EditarMultimedia() {
         setNombreEs(data.nombre_es || '');
         setType(data.type || '');
         setDestacado(data.destacado || false);
+        setMomentDay(data.moment_day || '');
+        setSeason(data.season || '');
         setIsLoading(false);
       })
       .catch(error => console.error('Error:', error));
@@ -61,6 +65,12 @@ function EditarMultimedia() {
         case 'destacado':
             setDestacado(type === 'checkbox' ? checked : value);
           break;
+          case 'momentDay':
+            setMomentDay(value);
+          break;
+          case 'season':
+            setSeason(value);
+          break;
         default:
           break;
       }
@@ -78,6 +88,8 @@ function EditarMultimedia() {
     formData.append('nombre_es', nombre_es);
     formData.append('type', type);
     formData.append('destacado', destacado);
+    formData.append('moment_day', momentDay);
+    formData.append('season', season);
 
     fetch(`https://mapaapi.onrender.com/api/multi/update/${id}`, {
       method: 'PUT',
@@ -136,9 +148,29 @@ function EditarMultimedia() {
                   </select>
                 </div>
                 <div className="input-field">
+                  <label className="input-titles-edit-usuario">Momento del dia:</label>
+                  <select name="momentDay" value={momentDay} onChange={handleChange} className="edit-multi-input">
+                    <option value="">Selecciona un tipo</option>
+                    <option value="mañana">Mañana</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noche">Noche</option>
+                  </select>
+                </div>
+                <div className="input-field">
+                  <label className="input-titles-edit-usuario">Temporada:</label>
+                  <select name="season" value={season} onChange={handleChange} className="edit-multi-input">
+                    <option value="">Selecciona un tipo</option>
+                    <option value="OTOÑO">Otoño</option>
+                    <option value="INVIERNO">Invierno</option>
+                    <option value="PRIMAVERA">Primavera</option>
+                    <option value="VERANO">Verano</option>
+                  </select>
+                </div>
+                <div className="input-field">
                   <label className="input-titles-edit-usuario-destacado">Destacado:</label>
                   <input type="checkbox" name="destacado" checked={destacado} onChange={handleChange} className="edit-multi-input" />
                 </div>
+                
               </div>
             </form>
           </>

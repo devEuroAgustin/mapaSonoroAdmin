@@ -18,6 +18,9 @@ const [puntos, setPuntos] = useState([]);
 const [usuarios, setUsuarios] = useState([]);
 const [isSubmitting, setIsSubmitting] = useState(false);
 const [fileName, setFileName] = useState('');
+const [momentDay, setMomentDay] = useState('');
+const [season, setSeason] = useState('');
+
 
 useEffect(() => {
   console.log(punto_id);
@@ -59,6 +62,12 @@ useEffect(() => {
           case 'user_id':
             setUserId(parseInt(value, 10));
             console.log(user_id)
+          case 'momentDay':
+            setMomentDay(value);
+          break;
+          case 'season':
+            setSeason(value);
+          break;
             break;
         default:
           break;
@@ -81,7 +90,8 @@ console.log(hora)
       formData.append('user_id', user_id);
       formData.append('type', type);
       formData.append('destacado', destacado);
-    
+      formData.append('moment_day', momentDay);
+      formData.append('season', season);
 
 
     
@@ -190,6 +200,25 @@ console.log(hora)
   ))}
 </select>
     </div>
+    <div className="input-field">
+                  <label className="input-titles-edit-usuario">Momento del dia:</label>
+                  <select name="momentDay" value={momentDay} onChange={handleChange} className="edit-multi-input">
+                    <option value="">Selecciona uno</option>
+                    <option value="mañana">Mañana</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noche">Noche</option>
+                  </select>
+                </div>
+                <div className="input-field">
+                  <label className="input-titles-edit-usuario">Temporada:</label>
+                  <select name="season" value={season} onChange={handleChange} className="edit-multi-input">
+                    <option value="">Selecciona uno</option>
+                    <option value="OTOÑO">Otoño</option>
+                    <option value="INVIERNO">Invierno</option>
+                    <option value="PRIMAVERA">Primavera</option>
+                    <option value="VERANO">Verano</option>
+                  </select>
+                </div>
   </div>
     </form>
   </div>
