@@ -101,12 +101,14 @@ function AgregarPunto() {
       <ControlPanel />
       <div className="main-content">
       <div className='mapa' onClick={handleMapClick}>  
+        <div className='contenidoMapa'>
   <div 
     className="punto" 
     style={{top: coordenadasObj.top, left: coordenadasObj.left, backgroundImage: `url(${radioButton})`}} 
     data-name={nombre_es}
-
-  ></div>
+    
+    ></div>
+    </div>
   </div>
 <button className='save-btn-point' type="submit" form="editForm">Guardar</button>
         <hr />

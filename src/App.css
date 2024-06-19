@@ -430,6 +430,12 @@ margin-left: 20px;
   margin-top: 20px;
   position: relative;
   background-color: #07570D;
+  overflow: auto;
+}
+
+.mapa > .contenidoMapa {
+  width: 200%;
+  height: 200%;
 }
 
 

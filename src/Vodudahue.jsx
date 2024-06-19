@@ -89,6 +89,7 @@ function MapaMain() {
           ) : (
             <>
               <div className="mapa">
+                <div className='contenidoMapa'>
                 {puntos.map((punto, index) => {
                   let coordenadas = {};
                   try {
@@ -115,6 +116,7 @@ function MapaMain() {
                     ></div>
                   );
                 })}
+                </div>
                 {isModalOpen && modalData && (
                   <ModalMapa onClose={closeModal}>
                     <div>

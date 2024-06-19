@@ -51,24 +51,26 @@ function ModuloPuntos() {
           <>
 
             <div className='mapa'>
+              <div className='contenidoMapa'>
               {puntos.map((punto, index) => {
                 let coordenadas = {};
                 try {
                   coordenadas = JSON.parse(punto.coordenadas);
-                } catch (error) {
-                  console.error('Error al parsear las coordenadas:', error);
-                }
-                const dataNameAttribute = nameVisibility ? punto.nombre_es : undefined;
-                return (
-                  <div 
-                    key={index} 
-                    className="punto" 
-                    style={{top: coordenadas.top, left: coordenadas.left, backgroundImage: `url(${radioButton})`}} 
-                    data-name={dataNameAttribute}
-                    onClick={() => handlePuntoClick(punto)}
-                  ></div>
-                );
-              })}
+                  } catch (error) {
+                    console.error('Error al parsear las coordenadas:', error);
+                    }
+                    const dataNameAttribute = nameVisibility ? punto.nombre_es : undefined;
+                    return (
+                      <div 
+                      key={index} 
+                      className="punto" 
+                      style={{top: coordenadas.top, left: coordenadas.left, backgroundImage: `url(${radioButton})`}} 
+                      data-name={dataNameAttribute}
+                      onClick={() => handlePuntoClick(punto)}
+                      ></div>
+                      );
+                      })}
+                    </div>
     {isModalOpen && modalData && (
       <ModalMapa onClose={closeModal}>
         <div style={{display: "flex"}}>
