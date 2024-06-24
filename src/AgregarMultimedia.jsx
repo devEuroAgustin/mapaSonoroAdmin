@@ -62,13 +62,13 @@ useEffect(() => {
           case 'user_id':
             setUserId(parseInt(value, 10));
             console.log(user_id)
+            break;
           case 'momentDay':
             setMomentDay(value);
           break;
           case 'season':
             setSeason(value);
           break;
-            break;
         default:
           break;
       }
