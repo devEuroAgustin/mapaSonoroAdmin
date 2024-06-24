@@ -16,6 +16,9 @@ function AgregarPunto() {
   const [descripcion_eng, setDescripcionEng] = useState('');
   const [type, setType] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [startY, setStartY] = useState(0);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -95,12 +98,39 @@ function AgregarPunto() {
     console.error('Error al parsear las coordenadas:', error);
   }
 
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - e.currentTarget.offsetLeft);
+    setStartY(e.pageY - e.currentTarget.offsetTop);
+    e.currentTarget.style.cursor = 'grabbing';
+};
+
+const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    const x = e.pageX - e.currentTarget.offsetLeft;
+    const y = e.pageY - e.currentTarget.offsetTop;
+    const walkX = (x - startX) * .3; // Multiplicar por 2 para hacer el movimiento más rápido
+    const walkY = (y - startY) * .3;
+    e.currentTarget.scrollLeft -= walkX;
+    e.currentTarget.scrollTop -= walkY;
+};
+
+const handleMouseUp = (e) => {
+    setIsDragging(false);
+    e.currentTarget.style.cursor = 'grab';
+};
+
   return (
     <div className="dashboard">
       <Header username={username1} />
       <ControlPanel />
       <div className="main-content">
-      <div className='mapa' onClick={handleMapClick}>  
+      <div className='mapa' onClick={handleMapClick}
+       onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+         onMouseUp={handleMouseUp}
+           onMouseLeave={handleMouseUp} 
+             style={{ cursor: 'grab', overflow: 'hidden' }} >  
         <div className='contenidoMapa'>
   <div 
     className="punto" 

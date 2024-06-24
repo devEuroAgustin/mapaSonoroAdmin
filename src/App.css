@@ -506,7 +506,7 @@ a.active {
 }
 }
 .modalmapa {
-  position: relative;
+  position: absolute  ;
   top: 0; /* ajusta según sea necesario */
   right: 0; /* ajusta según sea necesario */
   bottom: 0; /* ajusta según sea necesario */
@@ -523,7 +523,9 @@ a.active {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 340px;
+  max-width: 370px;
+  max-height: 500px; 
+  overflow-y: auto;
 }
 .nombre-modal-mapa {
   text-align: left;
@@ -533,6 +535,25 @@ a.active {
   opacity: 1;
   margin-left: 10px;
 }
+/* Para navegadores basados en WebKit (Chrome, Safari, etc.) */
+.modal-content-mapa::-webkit-scrollbar {
+  width: 5px; /* Ancho del scrollbar */
+}
+
+.modal-content-mapa::-webkit-scrollbar-track {
+  background: transparent; /* Fondo del track del scrollbar */
+}
+
+.modal-content-mapa::-webkit-scrollbar-thumb {
+  background: #888; /* Color del thumb del scrollbar */
+  border-radius: 10px; /* Bordes redondeados para el thumb */
+}
+
+.modal-content-mapa::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color del thumb al pasar el mouse */
+}
+
+
 .descripcion-modal-mapa {
   text-align: left;
 font: normal normal normal 14px/16px Arial;

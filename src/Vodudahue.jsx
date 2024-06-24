@@ -16,6 +16,9 @@ function MapaMain() {
     const [selectedValue, setSelectedValue] = useState('');
     const [Data, setData] = useState(null);
     const [imgRutaArchivo, setImgRutaArchivo] = useState('');
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
 
     const handleChange = (event) => {
       setSelectedValue(event.target.value);
@@ -42,6 +45,28 @@ function MapaMain() {
         setModalData(data);
       };
 
+      const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - e.currentTarget.offsetLeft);
+        setStartY(e.pageY - e.currentTarget.offsetTop);
+        e.currentTarget.style.cursor = 'grabbing';
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        const x = e.pageX - e.currentTarget.offsetLeft;
+        const y = e.pageY - e.currentTarget.offsetTop;
+        const walkX = (x - startX) * .3; // Multiplicar por 2 para hacer el movimiento más rápido
+        const walkY = (y - startY) * .3;
+        e.currentTarget.scrollLeft -= walkX;
+        e.currentTarget.scrollTop -= walkY;
+    };
+
+    const handleMouseUp = (e) => {
+        setIsDragging(false);
+        e.currentTarget.style.cursor = 'grab';
+    };
+
 
     useEffect(() => {
       fetch('https://mapaapi.onrender.com/api/points/')
@@ -60,6 +85,7 @@ function MapaMain() {
     useEffect(() => {
       if (idPoint !== undefined ) {
         fetch(`https://mapaapi.onrender.com/api/points/bySeasonAndMoment/${idPoint}`)
+        // fetch(`https://mapaapi.onrender.com/api/points/bySeasonAndMoment/${idPoint}?moment_day=${momentDay}&season=${season}`)
           .then(response => response.json())
           .then(data => {
             setData(data);
@@ -88,7 +114,14 @@ function MapaMain() {
             <Loader />
           ) : (
             <>
-              <div className="mapa">
+                        <div
+                            className="mapa"
+                            onMouseDown={handleMouseDown}
+                            onMouseMove={handleMouseMove}
+                            onMouseUp={handleMouseUp}
+                            onMouseLeave={handleMouseUp} 
+                            style={{ cursor: 'grab', overflow: 'hidden' }} 
+                        >
                 <div className='contenidoMapa'>
                 {puntos.map((punto, index) => {
                   let coordenadas = {};
@@ -113,112 +146,112 @@ function MapaMain() {
                       }}
                       data-name={dataNameAttribute}
                       onClick={() => handlePuntoClick(punto)}
-                    ></div>
-                  );
-                })}
+                      ></div>
+                      );
+                      })}
                 </div>
-                {isModalOpen && modalData && (
-                  <ModalMapa onClose={closeModal}>
-                    <div>
-                      <img src={imgRutaArchivo} className="imgfond" />
-                      <p className="descripcion-modal-mapa">
-                        {language === "English"
-                          ? modalData?.info_punto_eng
-                          : modalData?.info_punto_es}
-                      </p>
-                      <h2 className="nombre-modal-fund">
-                        {language === "English"
-                          ? modalData.nombre_eng
-                          : modalData.nombre_es}
-                      </h2>
-                    </div>
-                    <p className="descripcion-modal-mapa">
-                      {language === "English"
-                        ? modalData.descripcion_eng
-                        : modalData.descripcion_es}
-                    </p>
-                    <div className="buttons-container">
-                      <button
-                        className={`button-fund ${
-                          selectedButton === "OTOÑO" ? "selected" : ""
-                        }`}
-                        onClick={() => handleButtonClick("OTOÑO")}
-                      >
-                        OTOÑO
-                      </button>
-                      <button
-                        className={`button-fund ${
-                          selectedButton === "INVIERNO" ? "selected" : ""
-                        }`}
-                        onClick={() => handleButtonClick("INVIERNO")}
-                      >
-                        INVIERNO
-                      </button>
-                      <button
-                        className={`button-fund-xl ${
-                          selectedButton === "PRIMAVERA" ? "selected" : ""
-                        }`}
-                        onClick={() => handleButtonClick("PRIMAVERA")}
-                      >
-                        PRIMAVERA
-                      </button>
-                      <button
-                        className={`button-fund ${
-                          selectedButton === "VERANO" ? "selected" : ""
-                        }`}
-                        onClick={() => handleButtonClick("VERANO")}
-                      >
-                        VERANO
-                      </button>
-                    </div>
-                    <div style={{ display: "flex" }}>
-                      <p className="day-moment">Momento del día</p>
-                      <select
-                        name=""
-                        id=""
-                        className="select-fund"
-                        value={selectedValue}
-                        onChange={handleChange}
-                      >
-                        <option value="">todos</option>
-                        <option value="Mañana">Mañana</option>
-                        <option value="Tarde">Tarde</option>
-                        <option value="Noche">Noche</option>
-                      </select>
-                    </div>
-                    <div>
-  {Data && Data.registros_multimedia.map((recurso) => {
-    if (recurso.type === 'audio' ) {
-      return recurso.type === 'audio' ? (
-        <div key={recurso.id}>
-          <div style={{display:'flex'}}>
-          <h3 className='h3_fund'>{language === "English"
-                          ? recurso.nombre_eng
-                          : recurso.nombre_es}</h3>
-          {recurso?.moment_day && <p className='moment_day'>{recurso.moment_day}</p>}
+                        {isModalOpen && modalData && (
+                          <ModalMapa onClose={closeModal}>
+                            <div>
+                              <img src={imgRutaArchivo} className="imgfond" />
+                              <p className="descripcion-modal-mapa">
+                                {language === "English"
+                                  ? modalData?.info_punto_eng
+                                  : modalData?.info_punto_es}
+                              </p>
+                              <h2 className="nombre-modal-fund">
+                                {language === "English"
+                                  ? modalData.nombre_eng
+                                  : modalData.nombre_es}
+                              </h2>
+                            </div>
+                            <p className="descripcion-modal-mapa">
+                              {language === "English"
+                                ? modalData.descripcion_eng
+                                : modalData.descripcion_es}
+                            </p>
+                            <div className="buttons-container">
+                              <button
+                                className={`button-fund ${
+                                  selectedButton === "OTOÑO" ? "selected" : ""
+                                }`}
+                                onClick={() => handleButtonClick("OTOÑO")}
+                              >
+                                OTOÑO
+                              </button>
+                              <button
+                                className={`button-fund ${
+                                  selectedButton === "INVIERNO" ? "selected" : ""
+                                }`}
+                                onClick={() => handleButtonClick("INVIERNO")}
+                              >
+                                INVIERNO
+                              </button>
+                              <button
+                                className={`button-fund-xl ${
+                                  selectedButton === "PRIMAVERA" ? "selected" : ""
+                                }`}
+                                onClick={() => handleButtonClick("PRIMAVERA")}
+                              >
+                                PRIMAVERA
+                              </button>
+                              <button
+                                className={`button-fund ${
+                                  selectedButton === "VERANO" ? "selected" : ""
+                                }`}
+                                onClick={() => handleButtonClick("VERANO")}
+                              >
+                                VERANO
+                              </button>
+                            </div>
+                            <div style={{ display: "flex" }}>
+                              <p className="day-moment">Momento del día</p>
+                              <select
+                                name=""
+                                id=""
+                                className="select-fund"
+                                value={selectedValue}
+                                onChange={handleChange}
+                              >
+                                <option value="">todos</option>
+                                <option value="Mañana">Mañana</option>
+                                <option value="Tarde">Tarde</option>
+                                <option value="Noche">Noche</option>
+                              </select>
+                            </div>
+                            <div>
+          {Data && Data.registros_multimedia.map((recurso) => {
+            if (recurso.type === 'audio' ) {
+              return recurso.type === 'audio' ? (
+                <div key={recurso.id}>
+                  <div style={{display:'flex'}}>
+                  <h3 className='h3_fund'>{language === "English"
+                                  ? recurso.nombre_eng
+                                  : recurso.nombre_es}</h3>
+                  {recurso?.moment_day && <p className='moment_day'>{recurso.moment_day}</p>}
+                  </div>
+                                 
+                  <audio controls>
+                    <source src={recurso.ruta_archivo} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+              ) : (
+                <div key={recurso.id}>
+                  <h3>{recurso.nombre_es}</h3>
+                  <video controls>
+                    <source src={recurso.ruta_archivo} type="video/mp4" />
+                    Your browser does not support the video element.
+                  </video>
+                </div>
+              );
+            }
+            return null;
+          })}
           </div>
-                         
-          <audio controls>
-            <source src={recurso.ruta_archivo} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-      ) : (
-        <div key={recurso.id}>
-          <h3>{recurso.nombre_es}</h3>
-          <video controls>
-            <source src={recurso.ruta_archivo} type="video/mp4" />
-            Your browser does not support the video element.
-          </video>
-        </div>
-      );
-    }
-    return null;
-  })}
-</div>
-                    {/* <p className='description-modal-mapa'>{modalData.descripcion_engg}</p> */}
-                  </ModalMapa>
-                )}
+                            {/* <p className='description-modal-mapa'>{modalData.descripcion_engg}</p> */}
+                          </ModalMapa>
+                        )}
               </div>
             </>
           )}

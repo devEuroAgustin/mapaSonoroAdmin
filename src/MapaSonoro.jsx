@@ -17,6 +17,9 @@ function ModuloPuntos() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const [nameVisibility, setNameVisibility] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [startY, setStartY] = useState(0);
 
   const handlePuntoClick = (punto) => {
     setModalData(punto);
@@ -38,6 +41,28 @@ function ModuloPuntos() {
       .catch(error => console.error('Error:', error));
   }, []);
 
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - e.currentTarget.offsetLeft);
+    setStartY(e.pageY - e.currentTarget.offsetTop);
+    e.currentTarget.style.cursor = 'grabbing';
+};
+
+const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    const x = e.pageX - e.currentTarget.offsetLeft;
+    const y = e.pageY - e.currentTarget.offsetTop;
+    const walkX = (x - startX) * .3; // Multiplicar por 2 para hacer el movimiento más rápido
+    const walkY = (y - startY) * .3;
+    e.currentTarget.scrollLeft -= walkX;
+    e.currentTarget.scrollTop -= walkY;
+};
+
+const handleMouseUp = (e) => {
+    setIsDragging(false);
+    e.currentTarget.style.cursor = 'grab';
+};
+
   return (
     <div className="dashboard">
       <Header username={username} />
@@ -50,7 +75,14 @@ function ModuloPuntos() {
         ) : (
           <>
 
-            <div className='mapa'>
+                      <div
+                            className="mapa"
+                            onMouseDown={handleMouseDown}
+                            onMouseMove={handleMouseMove}
+                            onMouseUp={handleMouseUp}
+                            onMouseLeave={handleMouseUp} // Para manejar cuando el cursor sale del contenedor
+                            style={{ cursor: 'grab', overflow: 'hidden' }} // Estilo inicial para el cursor y ocultar barras de desplazamiento
+                        >
               <div className='contenidoMapa'>
               {puntos.map((punto, index) => {
                 let coordenadas = {};
