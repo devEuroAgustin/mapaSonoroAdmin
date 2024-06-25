@@ -783,3 +783,61 @@ letter-spacing: 0px;
 color: #2E2E2E;
 opacity: 1;
 }
+
+@media (max-width: 1366px) and (max-height: 1366px) {
+  .mapa {
+    width: 100vw;
+    height: 667px;
+    border: #BCBCBC 0.5px solid;
+    margin-top: 20px;
+    position: relative;
+    background-color: #07570D;
+}
+  
+  .fund-header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    height: 13%;
+    width: 100vw;
+    background-color: #000000;
+    border-bottom: 2px solid #bcbcbc;
+    margin-right: -2px;
+  }
+  
+  .fund-content {
+    position: absolute;
+    top: 10vh;
+    left: 0vw;
+}
+  
+  .logo-fund {
+    width: 250px;
+    height: 70px;
+    margin-left: -8px;
+    margin-top: 10px;
+  }
+  
+  .fund-title {
+    text-align: left;
+    font: normal normal normal 13px / 27px Arial;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    margin-left: 10px;
+  }
+  .fund-title {
+    display: none; /* Oculta el título en dispositivos móviles */
+  }
+}
+
+@media (min-width: 370px) and (max-width: 430px) {
+  .flag {
+    width: 50px;
+    height: 37px;
+    margin-top: 28px;
+    opacity: 1;
+    
+    margin-left: 15vw;
+}
+}
