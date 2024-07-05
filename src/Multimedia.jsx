@@ -108,8 +108,9 @@ const [selectedImage, setSelectedImage] = useState(null);
     {selectedImage.endsWith('.jpg') || selectedImage.endsWith('.png') ? (
       <img className="modal-content-imagen" src={selectedImage} />
     ) : (
+      
       <audio controls>
-        <source src={selectedImage} type="audio/mpeg" />
+        <source src={selectedImage} type="audio/mpeg"/>
         Tu navegador no soporta el elemento de audio.
       </audio>
     )}
