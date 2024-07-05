@@ -527,6 +527,8 @@ a.active {
   max-width: 370px;
   max-height: 500px; 
   overflow-y: auto;
+  min-width: 370px;
+  min-height: 500px;
 }
 .nombre-modal-mapa {
   text-align: left;
