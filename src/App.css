@@ -503,7 +503,16 @@ a.active {
   .main-content {
     position: absolute;
     top: 7vh;
-    left: 13vw;
+    left: 0vw
+}
+.mapa {
+  width: 100vw;
+  height: 100vh;
+  border: #BCBCBC 0px solid;
+  margin-top: 20px;
+  position: relative;
+  background-color: #07570d;
+  overflow: auto;
 }
 }
 .modalmapa {
@@ -708,8 +717,8 @@ textarea.edit-multi-input {
 @media screen and (min-width: 1920px) and (min-height: 1080px) {
   .fund-content {
     position: absolute;
-    top: 7vh;
-    left: 21vw;
+    top: 6vh;
+    left: 0vw;
 }
 }
 .imgfond{
