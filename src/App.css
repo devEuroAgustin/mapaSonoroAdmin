@@ -439,7 +439,6 @@ margin-left: 20px;
   width: 200%;
   height: 200%;
   background-image: url('../src/assets/mapa.jpg');
-  background-repeat: round;
 }
 
 
@@ -506,7 +505,7 @@ a.active {
   .main-content {
     position: absolute;
     top: 7vh;
-    left: 0vw
+    left: 14vw;
 }
 .mapa {
   width: 100vw;
@@ -712,17 +711,9 @@ textarea.edit-multi-input {
   margin-right: 20px;
 
 }
-/* .fund-content {
-  position: absolute;
-  top: 15vh;
-  left: 12vw;
-} */
+
 @media screen and (min-width: 1920px) and (min-height: 1080px) {
-  /* .fund-content {
-    position: absolute;
-    top: 6vh;
-    left: 0vw;
-} */
+
 }
 .imgfond{
   width: 100%;
@@ -808,7 +799,7 @@ opacity: 1;
 @media (max-width: 1366px) and (max-height: 1366px) {
   .mapa {
     width: 100vw;
-    height: 100vh;
+    height: 667px;
     border: #BCBCBC 0px solid;
     margin-top: 20px;
     position: relative;
@@ -826,11 +817,7 @@ opacity: 1;
     margin-right: -2px;
   }
   
-  /* .fund-content {
-    position: absolute;
-    top: 10vh;
-    left: 0vw;
-} */
+
   
   .logo-fund {
     width: 250px;
@@ -872,4 +859,26 @@ div.buttons-container{
 
 audio[controls] {
   width: 100%;
+}
+.mapa {
+  width: 1040px;
+  height: 590px;
+  border: #BCBCBC 0.5px solid;
+  margin-top: 20px;
+  position: relative;
+  /* background-color: #07570D; */
+  overflow: auto;
+}
+.mapa-fund {
+  width: 100vw;
+  height: 100vh;
+  border: #BCBCBC 0px solid;
+  margin-top: 20px;
+  position: relative;
+
+}
+.mapa-fund > .contenidoMapa-fund {
+  width: 200%;
+  height: 200%;
+  background-image: url('../src/assets/mapa.jpg');
 }

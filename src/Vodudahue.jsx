@@ -115,14 +115,14 @@ function MapaMain() {
           ) : (
             <>
                         <div
-                            className="mapa"
+                            className="mapa-fund"
                             onMouseDown={handleMouseDown}
                             onMouseMove={handleMouseMove}
                             onMouseUp={handleMouseUp}
                             onMouseLeave={handleMouseUp} 
                             style={{ cursor: 'grab', overflow: 'hidden' }} 
                         >
-                <div className='contenidoMapa'>
+                <div className='contenidoMapa-fund'>
                 {puntos.map((punto, index) => {
                   let coordenadas = {};
                   try {
