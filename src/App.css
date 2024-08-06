@@ -430,7 +430,8 @@ margin-left: 20px;
   border: #BCBCBC 0.5px solid;
   margin-top: 20px;
   position: relative;
-  background-color: #07570D;
+  /* background-color: #07570D; */
+  background-image: url('../src/assets/mapa.jpg');
   overflow: auto;
 }
 
