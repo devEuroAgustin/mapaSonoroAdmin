@@ -431,13 +431,15 @@ margin-left: 20px;
   margin-top: 20px;
   position: relative;
   /* background-color: #07570D; */
-  background-image: url('../src/assets/mapa.jpg');
+  
   overflow: auto;
 }
 
 .mapa > .contenidoMapa {
   width: 200%;
   height: 200%;
+  background-image: url('../src/assets/mapa.jpg');
+  background-repeat: round;
 }
 
 
