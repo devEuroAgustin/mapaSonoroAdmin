@@ -712,17 +712,17 @@ textarea.edit-multi-input {
   margin-right: 20px;
 
 }
-.fund-content {
+/* .fund-content {
   position: absolute;
   top: 15vh;
   left: 12vw;
-}
+} */
 @media screen and (min-width: 1920px) and (min-height: 1080px) {
-  .fund-content {
+  /* .fund-content {
     position: absolute;
     top: 6vh;
     left: 0vw;
-}
+} */
 }
 .imgfond{
   width: 100%;
@@ -826,11 +826,11 @@ opacity: 1;
     margin-right: -2px;
   }
   
-  .fund-content {
+  /* .fund-content {
     position: absolute;
     top: 10vh;
     left: 0vw;
-}
+} */
   
   .logo-fund {
     width: 250px;
