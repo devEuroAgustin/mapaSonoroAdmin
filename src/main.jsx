@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
         <Route path="/recover-password" element={<RecoverPassword />} />
-        <Route path="/" element={<Vodudahue />} />
+        <Route path="/" element={<App />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/usuarios" element={<ModuloUsuarios />} />
         <Route path="/editar-usuario/:id" element={<EditarUsuario />} />
