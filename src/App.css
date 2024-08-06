@@ -808,7 +808,7 @@ opacity: 1;
 @media (max-width: 1366px) and (max-height: 1366px) {
   .mapa {
     width: 100vw;
-    height: 667px;
+    height: 100vh;
     border: #BCBCBC 0px solid;
     margin-top: 20px;
     position: relative;
